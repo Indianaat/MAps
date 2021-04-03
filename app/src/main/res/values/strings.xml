@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Geo</string>
+    <string name="hint_login">Identifiant</string>
+    <string name="hint_password">Mot de passe</string>
+    <string name="but_valider">Valider</string>
+    <string name="but_effacer">Effacer</string>
+    <string name="but_quitter">Quitter</string>
+    <string name="login"></string>
+    <string name="password"></string>
+    <string name="mdp512">f69624921ee6583a0c42e446f6f87d055da032f93d3d1c2b281d4d246727dd48d2ad907f7ca16a96191e2c1f59f5642b4b04792df7da1309f7488fd3f17ce2f4</string>
+    <string name="logok">Login et mot de passe corrects</string>
+    <string name="logfailed">Login ou mot de passe incorrect</string>
+
+</resources>
