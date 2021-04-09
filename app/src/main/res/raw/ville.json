@@ -1,0 +1,97 @@
+[
+  {
+    "Ville": "Paris",
+    "Latitude": 48.866667,
+    "Longitude": 2.333333
+  },
+  {
+    "Ville": "Marseille",
+    "Latitude": 43.2961743,
+    "Longitude": 5.3699525
+  },
+  {
+    "Ville": "Lyon",
+    "Latitude": 45.7578137,
+    "Longitude": 4.8320114
+  },
+  {
+    "Ville": "Nantes",
+    "Latitude": 47.2186371,
+    "Longitude": -1.5541362
+  },
+  {
+    "Ville": "Saint-etienne",
+    "Latitude": 45.4401467,
+    "Longitude": 4.3873058
+  },
+  {
+    "Ville": "Lille",
+    "Latitude": 50.6365654,
+    "Longitude": 3.0635282
+  },
+  {
+    "Ville": "Amiens",
+    "Latitude": 49.8941708,
+    "Longitude": 2.2956951
+  },
+  {
+    "Ville": "Nice",
+    "Latitude": 43.7009358,
+    "Longitude": 7.2683912
+  },
+  {
+    "Ville": "Toulouse",
+    "Latitude": 43.6044622,
+    "Longitude": 1.4442469
+  },
+  {
+    "Ville": "Agen",
+    "Latitude": 44.2015827,
+    "Longitude": 0.6176112
+  },
+  {
+    "Ville": "Strasbourg",
+    "Latitude": 48.584614,
+    "Longitude": 7.7507127
+  },
+  {
+    "Ville": "Aix-en-Provence",
+    "Latitude": 43.5298424,
+    "Longitude": 5.4474738
+  },
+  {
+    "Ville": "Reims",
+    "Latitude": 49.2577886,
+    "Longitude": 4.031926
+  },
+  {
+    "Ville": "Renne",
+    "Latitude": 48.1113387,
+    "Longitude": -1.6800198
+  },
+  {
+    "Ville": "Nancy",
+    "Latitude": 48.6937223,
+    "Longitude": 6.1834097
+  },
+  {
+    "Ville": "Angers",
+    "Latitude": 47.4739884,
+    "Longitude": -0.5515588
+  },
+  {
+    "Ville": "Bordeaux",
+    "Latitude": 44.841225,
+    "Longitude": -0.5800364
+  },
+  {
+    "Ville": "Montauban",
+    "Latitude": 44.0175835,
+    "Longitude": 1.3549991
+  },
+  {
+    "Ville": "Montpellier",
+    "Latitude": 43.6112422,
+    "Longitude": 3.8767337
+  }
+]
