@@ -1,3 +1,9 @@
+/**
+ L'activity Connexion
+ Permet de se connecter pour enregistrer les scores par la suite
+
+ **/
+
 package com.example.geo;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,6 +17,7 @@ import android.widget.Toast;
 public class Connexion extends AppCompatActivity {
 
     EditText login, password;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,13 +26,8 @@ public class Connexion extends AppCompatActivity {
         password = findViewById(R.id.password);
 
     }
-    public void actQuitter(View v){
-        finish();
-    }
-    public void actEffacer(View v){
-        login.setText("");
-        password.setText("");
-    }
+
+    // Bouton valider --> Vérifier les identifiants. Si ils sont corrects renvoie sur l'activité Accueil
     public void actValider(View v){
         if(login.getText().toString().equals(getResources().getString(R.string.login)) &&
                 password.getText().toString().equals(getResources().getString(R.string.password))){

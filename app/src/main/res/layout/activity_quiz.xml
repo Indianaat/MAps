@@ -28,12 +28,14 @@
             android:textSize="22dp" />
 
         <ImageView
+            android:id="@+id/ImageQuiz"
             android:layout_width="wrap_content"
             android:layout_height="280dp"
             android:background="@color/bleu_principal"
             app:srcCompat="@drawable/tour_effeil" />
 
         <TextView
+            android:id="@+id/Question"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/bleu_principal"
@@ -68,6 +70,7 @@
             android:gravity="center"
             android:text="Duo"
             android:padding="10dp"
+            android:background="@drawable/bouton"
             android:layout_marginBottom="16dp"
             android:layout_marginTop="16dp"
             android:textColor="@color/vert_principal"
@@ -79,6 +82,7 @@
             android:layout_height="wrap_content"
             android:text="Carré"
             android:padding="10dp"
+            android:background="@drawable/bouton"
             android:layout_marginBottom="16dp"
             android:textColor="@color/vert_principal"
             app:backgroundTint="@color/white" />
@@ -89,6 +93,7 @@
             android:layout_height="wrap_content"
             android:text="Cash"
             android:padding="10dp"
+            android:background="@drawable/bouton"
             android:layout_marginBottom="16dp"
             android:textColor="@color/vert_principal"
             app:backgroundTint="@color/white" />
