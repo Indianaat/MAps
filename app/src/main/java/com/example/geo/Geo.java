@@ -1,3 +1,9 @@
+/**
+ L'activity Geo
+ Jeu calcul de distance
+
+ **/
+
 package com.example.geo;
 
 import androidx.appcompat.app.AppCompatActivity;

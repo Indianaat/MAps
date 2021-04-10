@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Geo">
-        <activity android:name=".Score"></activity>
+        <activity android:name=".Score" />
         <activity android:name=".Geo" />
         <activity android:name=".Quiz" />
         <activity android:name=".Accueil" />
@@ -20,7 +20,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity" />
+        <activity android:name=".MainActivity">
+
+        </activity>
     </application>
 
 </manifest>
