@@ -1,14 +1,9 @@
 package com.example.geo;
 
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 
-import android.Manifest;
-import android.content.Intent;
-import android.content.pm.PackageManager;
+import android.app.AlertDialog;
 import android.content.res.Resources;
-import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -16,24 +11,17 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
-import com.google.android.gms.maps.model.CameraPosition;
-import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.Marker;
-import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
-import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.maps.android.SphericalUtil;
 
 import org.json.simple.JSONArray;
-import org.json.JSONException;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -41,8 +29,6 @@ import org.json.simple.parser.ParseException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.StringWriter;
-import java.io.Writer;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -56,11 +42,13 @@ public class Geo extends FragmentActivity implements OnMapReadyCallback {
     HashMap<String, LatLng> Mapcity = new HashMap();
     Integer CityChosen;
     TextView cityChosenView, txtNumQuest;
-    Double distance;
+    Double distance, score;
     Button btnNext;
     Integer numQuestion =0;
-    Marker markerCityChosen, markerCityFound;
+    Marker markerPointChoisi, markerVilleATrouver;
     Polyline distancePoly;
+    LatLng cooPointChoisi, cooVilleATrouver;
+    private Geo geoActivity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,8 +59,9 @@ public class Geo extends FragmentActivity implements OnMapReadyCallback {
         btnNext = (Button) findViewById(R.id.btnNext);
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map); // Fragment de la map google
-
+        this.geoActivity = this;
         mapFragment.getMapAsync(this);
+
 
         InputStream in = getResources().openRawResource(R.raw.ville); // Inputstream des villes pouvant être choisi
 
@@ -103,10 +92,7 @@ public class Geo extends FragmentActivity implements OnMapReadyCallback {
             e.printStackTrace();
         }
 
-        // Choix random de la ville
-        Random rand = new Random();
-        CityChosen = rand.nextInt(Mapcity.size()+1);
-        cityChosenView.setText(arrayVille.get(CityChosen));
+
     }
 
 
@@ -119,15 +105,27 @@ public class Geo extends FragmentActivity implements OnMapReadyCallback {
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
+        //Gestionnaire pour la map
+        GestionMap gestionMap = new GestionMap(googleMap);
+
         // Disposition de la map
-        LatLng latLng2 = new LatLng(0,0);
         mMap = googleMap;
         mMap.setLatLngBoundsForCameraTarget(franceBounds);
         mMap.setMinZoomPreference(5.0f);
         mMap.setMaxZoomPreference(10.0f);
 
-        // On place le points au coordonées choisi
-        LatLng cityFounded = Mapcity.get(arrayVille.get(CityChosen));
+        //supression des anciens  markeur et lignes
+        if (markerPointChoisi != null){
+            markerPointChoisi.remove();
+        }
+        if (distancePoly != null){
+            distancePoly.remove();
+        }
+        if (markerVilleATrouver != null){
+            markerVilleATrouver.remove();
+        }
+
+
         try {
             // On customise notre MAP avec le JSON mapstyle
             boolean success = googleMap.setMapStyle(
@@ -141,32 +139,63 @@ public class Geo extends FragmentActivity implements OnMapReadyCallback {
         } catch (Resources.NotFoundException e) {
             Log.e("MapsActivity", "Can't find style. Error: ", e);
         }
+
+        // Choix random de la ville
+        Random rand = new Random();
+        CityChosen = rand.nextInt(Mapcity.size()+1);
+        cityChosenView.setText(arrayVille.get(CityChosen)); // affichage de la ville a choisir
+        cooVilleATrouver = Mapcity.get(arrayVille.get(CityChosen));
+
+        // On Détermine les coordonnées de la ville a trouver
+        LatLng cityFounded = Mapcity.get(arrayVille.get(CityChosen));
+
         // Méthode pour mettre le marker sur la map
         mMap.setOnMapLongClickListener(new GoogleMap.OnMapLongClickListener() {
             @Override
-            public void onMapLongClick(LatLng latLng2) {
-                if (markerCityChosen != null){
-                    markerCityChosen.remove();
-                    distancePoly.remove();
+            public void onMapLongClick(LatLng LatLgnCityChosen) {
+                if( cooPointChoisi == null){
+                    if (markerPointChoisi != null) {
+                        markerPointChoisi.remove();
+                    }
+                    if (distancePoly != null) {
+                        distancePoly.remove();
+                    }
+                    if (markerVilleATrouver != null){
+                        markerVilleATrouver.remove();
+                    }
+
+                    cooPointChoisi = LatLgnCityChosen;
+                    // Ajour du markeur sur la map apres un long clic
+                    markerPointChoisi=gestionMap.PlaceMarker(cooPointChoisi);
+
+                    //calcul de la distance entre les 2 points
+                    distance = SphericalUtil.computeDistanceBetween(cooPointChoisi, cooVilleATrouver);
+
+                    //Affichage du trait reliant les 2 positions
+                    gestionMap.TracerDistance(cooPointChoisi,cooPointChoisi);
+                    // Ajout du marker de la ville à trouver
+                    markerVilleATrouver=gestionMap.PlaceMarker(cooVilleATrouver);
+
+                    distancePoly =mMap.addPolyline(gestionMap.TracerDistance(cooVilleATrouver,cooPointChoisi));
+                    // Toast de la distance
+                    //Toast.makeText(Geo.this,"Distance \n " + String.format("%.2f", distance / 1000) + "km",Toast.LENGTH_LONG).show();
+                    score = 100/(1+distance);
+                    Toast.makeText(Geo.this,"Score : " + String.format("%f",100/(1+distance) ) + "points",Toast.LENGTH_LONG).show();
+
+
+                    //PopUP
+                    AlertDialog.Builder scorePopup = new AlertDialog.Builder(geoActivity);
+                    scorePopup.setTitle("Votre Score");
+                    scorePopup.setMessage(String.format("%f",100/(1+distance) ) + " Points");
+                    scorePopup.show();
+                }else {
+                    //PopUP
+                    AlertDialog.Builder scorePopup = new AlertDialog.Builder(geoActivity);
+                    scorePopup.setTitle("Partie déja joué");
+                    scorePopup.setMessage("Veuillez cliquer sur suivant vous avez déja posé votre point");
+                    scorePopup.show();
                 }
-                // Ajour du markeur sur la map apres un long clic
-                markerCityChosen = googleMap.addMarker(new MarkerOptions()
-                        .position(latLng2)
-                        .title("Your marker title")
-                        .snippet("Your marker snippet"));
-                //calcul de la distance entre les 2 points
-                distance = SphericalUtil.computeDistanceBetween(latLng2, Mapcity.get(arrayVille.get(CityChosen)));
-                //Affichage du trait reliant les 2 positions
-                PolylineOptions rectOptions = new PolylineOptions()
-                        .add(latLng2)
-                        .add(Mapcity.get(arrayVille.get(CityChosen)));
-                        // Ajout du marker de la ville à trouver
-                markerCityFound = googleMap.addMarker(new MarkerOptions()
-                        .position(cityFounded)
-                        .title("Marker ville à trouver "));
-                distancePoly =mMap.addPolyline(rectOptions);
-                        // Toast de la distance
-                Toast.makeText(Geo.this,"Distance \n " + String.format("%.2f", distance / 1000) + "km",Toast.LENGTH_LONG).show();
+
             }
 
         });
@@ -174,21 +203,22 @@ public class Geo extends FragmentActivity implements OnMapReadyCallback {
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (numQuestion < 6){
-                    if (markerCityChosen != null) {
-                        markerCityChosen.remove();
+                if (numQuestion < 5){
+                    if (markerPointChoisi != null) {
+                        markerPointChoisi.remove();
                     }
                     if (distancePoly != null) {
                         distancePoly.remove();
                     }
-                    if (markerCityFound != null){
-                        markerCityFound.remove();
+                    if (markerVilleATrouver != null){
+                        markerVilleATrouver.remove();
                     }
+                    cooPointChoisi =null;
                     // Choix random de la ville
                     Random rand = new Random();
-                    CityChosen = rand.nextInt(Mapcity.size()+1);
+                    CityChosen = rand.nextInt(Mapcity.size());
                     cityChosenView.setText(arrayVille.get(CityChosen));
-                    LatLng cityFounded = Mapcity.get(arrayVille.get(CityChosen));
+                    cooVilleATrouver = Mapcity.get(arrayVille.get(CityChosen));
                     numQuestion = numQuestion+1;
                     txtNumQuest.setText(numQuestion.toString() + "/ 5");
                 }
