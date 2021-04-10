@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "704073367707",
+    "firebase_url": "https://projetmaps-64446-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "projetmaps-64446",
+    "storage_bucket": "projetmaps-64446.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:704073367707:android:c848359a9ecc566ae5863e",
+        "android_client_info": {
+          "package_name": "com.example.geo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "704073367707-is9b6d62209ocj55jmmk9ldjail6scqf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCaPAmwLLrSI9PfxXQM95Lixsa2r1kznRE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "704073367707-is9b6d62209ocj55jmmk9ldjail6scqf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
