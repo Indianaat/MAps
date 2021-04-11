@@ -10,6 +10,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.nfc.Tag;
@@ -85,9 +87,7 @@ public class Quiz extends AppCompatActivity {
         if (compteur > maxquestions  ) {       // le quiz s'arrête au bout de n questions (n = maxquestions)
 
             Toast.makeText(getApplicationContext(), "Fin du quiz", Toast.LENGTH_SHORT).show();
-            // On lance l'activité Score
-            Intent i = new Intent(Quiz.this, Score.class);
-            startActivity(i);
+            popupFinQuiz();
 
         } else {        //Si le nombre de questions max n'est pas atteint:
 
@@ -206,6 +206,37 @@ public class Quiz extends AppCompatActivity {
                 }
             });
         }
+    }
+
+    public void popupFinQuiz(){
+
+        //popup fin de quiz
+        AlertDialog.Builder scorePopup = new AlertDialog.Builder(this);
+        scorePopup.setTitle("Votre Score:");
+        scorePopup.setMessage(score + " points");
+        // Bouton sur le popup suivant --> renvoi vers l'Accueil (choix mini jeux)
+        scorePopup.setPositiveButton("Suivant", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Toast.makeText(getApplicationContext(), "Fin du jeu", Toast.LENGTH_SHORT).show();
+
+                // On lance l'activité Score
+                Intent i = new Intent(Quiz.this, Accueil.class);
+                startActivity(i);
+            }
+        });
+        // Bouton sur le popup Rejouer --> relance le quiz
+        scorePopup.setNegativeButton("Rejouer", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Toast.makeText(getApplicationContext(), "Une nouvelle partie commence", Toast.LENGTH_SHORT).show();
+
+                // On lance l'activité Score
+                Intent i = new Intent(Quiz.this, Quiz.class);
+                startActivity(i);
+            }
+        });
+        scorePopup.show();
     }
 }
 
