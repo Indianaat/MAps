@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/fond_degrade"
     tools:context=".Geo">
 
     <fragment
@@ -18,7 +19,7 @@
 
     <TextView
         android:id="@+id/textView2"
-        android:layout_width="63dp"
+        android:layout_width="wrap_content"
         android:layout_height="22dp"
         android:text="Ville : "
         app:layout_constraintBottom_toTopOf="@+id/map"
@@ -32,23 +33,27 @@
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textAlignment="center"
         android:text="Objectif : Ce situer le plus proche de la ville"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/map"
-        app:layout_constraintVertical_bias="0.279" />
+        app:layout_constraintVertical_bias="0.279"
+        android:gravity="center_horizontal" />
 
     <TextView
         android:id="@+id/textView4"
-        android:layout_width="291dp"
-        android:layout_height="24dp"
-        android:text="Appoyez Longtemps pour mettre votre marker"
+        android:layout_width="315dp"
+        android:layout_height="22dp"
+        android:text="Appuyez LONGTEMPS pour mettre votre marker"
+        android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3"
-        app:layout_constraintVertical_bias="0.213" />
+        app:layout_constraintVertical_bias="0.213"
+        android:gravity="center_horizontal" />
 
     <Button
         android:id="@+id/btnNext"
@@ -68,12 +73,14 @@
         android:id="@+id/cityChosen"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:textSize="24dp"
         app:layout_constraintBottom_toTopOf="@+id/map"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.184"
+        app:layout_constraintHorizontal_bias="0.129"
         app:layout_constraintStart_toEndOf="@+id/textView2"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.537" />
+        app:layout_constraintVertical_bias="0.509" />
 
     <TextView
         android:id="@+id/txtNumQuest"

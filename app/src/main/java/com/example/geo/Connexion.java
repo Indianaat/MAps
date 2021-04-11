@@ -96,16 +96,4 @@ public class Connexion extends AppCompatActivity {
         });
 
     }
-        /*if(login.getText().toString().equals(getResources().getString(R.string.login)) &&
-                password.getText().toString().equals(getResources().getString(R.string.password))){
-            Toast.makeText(getApplicationContext(),getResources().getString(R.string.logok),Toast.LENGTH_LONG).show();
-            //Envoi de l'intent à l'activity accueil
-            Intent i= new Intent(Connexion.this,Accueil.class);
-            i.putExtra("msg",login.getText().toString());
-            //lancement de l'activity Accueil
-            startActivity(i);
-        }
-        else
-            Toast.makeText(getApplicationContext(),getResources().getString(R.string.logfailed),Toast.LENGTH_LONG).show();*/
-
 }
