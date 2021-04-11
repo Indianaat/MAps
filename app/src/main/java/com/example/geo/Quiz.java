@@ -35,6 +35,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.squareup.picasso.Picasso;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -43,10 +44,9 @@ import java.util.List;
 public class Quiz extends AppCompatActivity {
 
     ImageView imageQuiz;
-    TextView questions;
+    TextView questions, numQuestion;
     Button option1, option2, option3;
 
-    int numQuestion;
     int compteur=0;
     int score=0;
     int maxquestions = 3;
@@ -59,6 +59,7 @@ public class Quiz extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz);
 
+        numQuestion = findViewById(R.id.numQuest);
         imageQuiz = findViewById(R.id.ImageQuiz);
         questions = findViewById(R.id.Question);
         option1 = findViewById(R.id.Duo);
@@ -66,6 +67,7 @@ public class Quiz extends AppCompatActivity {
         option3 = findViewById(R.id.Cash);
 
         firestore = FirebaseFirestore.getInstance();
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         score = 0;
     }
 
@@ -89,6 +91,7 @@ public class Quiz extends AppCompatActivity {
 
         } else {        //Si le nombre de questions max n'est pas atteint:
 
+            numQuestion.setText(compteur + "/" + maxquestions);
             // Chemin pour récupérer les question : Question + numéro
             databaseReference = FirebaseDatabase.getInstance().getReference().child("questions").child(String.valueOf(compteur));
             databaseReference.addValueEventListener(new ValueEventListener() {
@@ -101,6 +104,8 @@ public class Quiz extends AppCompatActivity {
                     option1.setText(question.getOption1());
                     option2.setText(question.getOption2());
                     option3.setText(question.getOption3());
+                    // Ajout du changement d'image avec Picasso
+                    Picasso.get().load(question.getImage()).into(imageQuiz);
 
                     // L'utilisateur clique sur le 1er bouton
                     option1.setOnClickListener(new View.OnClickListener() {
