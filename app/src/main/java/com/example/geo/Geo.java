@@ -185,14 +185,13 @@ public class Geo extends FragmentActivity implements OnMapReadyCallback {
                     distancePoly =mMap.addPolyline(gestionMap.TracerDistance(cooVilleATrouver,cooPointChoisi));
                     // Toast de la distance
                     //Toast.makeText(Geo.this,"Distance \n " + String.format("%.2f", distance / 1000) + "km",Toast.LENGTH_LONG).show();
-                    score = 100/(1+distance);
-                    Toast.makeText(Geo.this,"Score : " + String.format("%f",100/(1+distance) ) + "points",Toast.LENGTH_LONG).show();
+                    score = 5000/(1+((distance/1000)/100) );
 
 
                     //PopUP
                     AlertDialog.Builder scorePopup = new AlertDialog.Builder(geoActivity);
                     scorePopup.setTitle("Votre Score");
-                    scorePopup.setMessage(String.format("%f",100/(1+distance) ) + " Points");
+                    scorePopup.setMessage(String.format("%.2f",score) + " Points");
                     scorePopup.show();
                 }else {
                     //PopUP

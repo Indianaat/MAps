@@ -66,6 +66,7 @@ public class Inscription extends AppCompatActivity {
                 final String email = mEmail.getText().toString().trim();
                 String password = mPassword.getText().toString().trim();
                 final String pseudo = mPseudo.getText().toString();
+                String pseudo2 = mPseudo.getText().toString();
 
 
                 if(TextUtils.isEmpty(email)){

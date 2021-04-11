@@ -1,6 +1,7 @@
 package com.example.geo;
 
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -18,7 +19,7 @@ public class GestionMap {
     Marker PlaceMarker (LatLng cooPoint){
 
         Marker markerPoint = googleMap.addMarker(new MarkerOptions()
-                .position(cooPoint)
+                .position(cooPoint).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE))
                 .title("Your marker title")
                 .snippet("Your marker snippet"));
         return  markerPoint;
