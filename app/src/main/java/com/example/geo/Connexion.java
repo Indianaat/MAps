@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -28,7 +29,6 @@ public class Connexion extends AppCompatActivity {
     EditText login, password;
     ProgressBar progressBar;
     FirebaseAuth fAuth;
-    TextView mCreateBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,10 +38,21 @@ public class Connexion extends AppCompatActivity {
         password = findViewById(R.id.password);
         progressBar = findViewById(R.id.progressBar2);
         fAuth = FirebaseAuth.getInstance();
-        mCreateBtn = findViewById(R.id.createText2);
 
     }
 
+    // lien pour s'enregistrer sans les scores
+    public void actNoScore(View v){
+        Intent i= new Intent(Connexion.this,Accueil.class);
+        i.putExtra("msg","Bienvenue sur l'application Maps");
+        startActivity(i);
+    }
+    // text pour créer un compte
+    public void actCreeCompte(View v){
+        Intent i= new Intent(Connexion.this,Inscription.class);
+        i.putExtra("msg","Veuillez créer un compte");
+        startActivity(i);
+    }
 
     // Bouton valider --> Vérifier les identifiants. Si ils sont corrects renvoie sur l'activité Accueil
     public void actValider(View v){
@@ -83,14 +94,7 @@ public class Connexion extends AppCompatActivity {
                 }
             }
         });
-        // text pour créer un compte
-        mCreateBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i= new Intent(Connexion.this,Inscription.class);
-                startActivity(i);
-            }
-        });
+
     }
         /*if(login.getText().toString().equals(getResources().getString(R.string.login)) &&
                 password.getText().toString().equals(getResources().getString(R.string.password))){
