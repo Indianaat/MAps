@@ -41,17 +41,23 @@ import com.squareup.picasso.Picasso;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 
 public class Quiz extends AppCompatActivity {
 
+    private static final String TAG = "Log: ";
     ImageView imageQuiz;
     TextView questions, numQuestion;
-    Button option1, option2, option3;
+    Button option1, option2, option3, option4;
+    List listQuestion = Arrays.asList();
 
-    int compteur=0;
-    int score=0;
-    int maxquestions = 3;
+    int compteur = 0;
+    int score = 0;
+    int maxquestions = 10;
+    int idQuestion;
+    int totalQuestions = 11;
 
     DatabaseReference databaseReference;
     FirebaseFirestore firestore;
@@ -67,6 +73,7 @@ public class Quiz extends AppCompatActivity {
         option1 = findViewById(R.id.Duo);
         option2 = findViewById(R.id.Carre);
         option3 = findViewById(R.id.Cash);
+        option4 = findViewById(R.id.Autres);
 
         firestore = FirebaseFirestore.getInstance();
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
@@ -81,8 +88,9 @@ public class Quiz extends AppCompatActivity {
 
     // Lancement du quiz
     public void lancementQuiz() {
-
         compteur++;
+        idQuestion = genereRandom(1, totalQuestions+1);
+        Log.d(TAG, idQuestion+ "");
 
         if (compteur > maxquestions  ) {       // le quiz s'arrête au bout de n questions (n = maxquestions)
 
@@ -93,7 +101,7 @@ public class Quiz extends AppCompatActivity {
 
             numQuestion.setText(compteur + "/" + maxquestions);
             // Chemin pour récupérer les question : Question + numéro
-            databaseReference = FirebaseDatabase.getInstance().getReference().child("questions").child(String.valueOf(compteur));
+            databaseReference = FirebaseDatabase.getInstance().getReference().child("questions").child(String.valueOf(idQuestion));
             databaseReference.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -104,6 +112,7 @@ public class Quiz extends AppCompatActivity {
                     option1.setText(question.getOption1());
                     option2.setText(question.getOption2());
                     option3.setText(question.getOption3());
+                    option4.setText(question.getOption4());
                     // Ajout du changement d'image avec Picasso
                     Picasso.get().load(question.getImage()).into(imageQuiz);
 
@@ -198,6 +207,33 @@ public class Quiz extends AppCompatActivity {
                             }
                         }
                     });
+                    option4.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            // Vérification si option3 corresponds à la réponse
+                            if (option4.getText().toString().equals(question.answer)) {
+                                score++;
+                                Toast.makeText(getApplicationContext(), "Correct answer", Toast.LENGTH_SHORT).show();
+
+                                Handler handler = new Handler();
+
+                                handler.postDelayed(new Runnable() {
+                                    public void run() {
+                                        lancementQuiz();
+                                    }
+                                }, 2000);
+                            } else {
+                                Toast.makeText(getApplicationContext(), "Incorrect", Toast.LENGTH_SHORT).show();
+
+                                Handler handler = new Handler();
+                                handler.postDelayed(new Runnable() {
+                                    public void run() {
+                                        lancementQuiz();
+                                    }
+                                }, 1500);
+                            }
+                        }
+                    });
                 }
 
                 @Override
@@ -237,6 +273,11 @@ public class Quiz extends AppCompatActivity {
             }
         });
         scorePopup.show();
+    }
+    public int genereRandom(int borneMin , int borneMax){ // Génération d'un idQuestions aléatoire
+        Random random = new Random();
+        idQuestion = borneMin+random.nextInt(borneMax-borneMin);
+        return idQuestion;
     }
 }
 
