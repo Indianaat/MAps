@@ -12,15 +12,15 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:background="@color/bleu_principal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/partie"
+            android:id="@+id/numQuest"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/bleu_principal"
             android:gravity="center"
             android:padding="5dp"
             android:text="1/10"
@@ -31,14 +31,13 @@
             android:id="@+id/ImageQuiz"
             android:layout_width="wrap_content"
             android:layout_height="280dp"
-            android:background="@color/bleu_principal"
+            android:layout_gravity="center"
             app:srcCompat="@drawable/tour_effeil" />
 
         <TextView
             android:id="@+id/Question"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/bleu_principal"
             android:gravity="center"
             android:padding="10dp"
             android:text="Question"
@@ -92,6 +91,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Cash"
+            android:padding="10dp"
+            android:background="@drawable/bouton"
+            android:layout_marginBottom="16dp"
+            android:textColor="@color/vert_principal"
+            app:backgroundTint="@color/white" />
+        <Button
+            android:id="@+id/Autres"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Autres"
             android:padding="10dp"
             android:background="@drawable/bouton"
             android:layout_marginBottom="16dp"

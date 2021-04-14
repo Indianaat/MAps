@@ -42,6 +42,7 @@ import java.util.Iterator;
 import java.util.Random;
 
 public class Geo extends FragmentActivity implements OnMapReadyCallback {
+
     private GoogleMap mMap;
     private LatLng latLng2;
     String in;
