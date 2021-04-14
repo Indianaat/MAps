@@ -17,7 +17,6 @@ public class GestionMap {
         this.googleMap = googleMap;
     }
     Marker PlaceMarker (LatLng cooPoint){
-
         Marker markerPoint = googleMap.addMarker(new MarkerOptions()
                 .position(cooPoint).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE))
                 .title("Your marker title")

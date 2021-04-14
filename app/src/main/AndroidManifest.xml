@@ -12,9 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Geo">
-        <activity android:name=".Inscription">
-
-        </activity>
+        <activity android:name=".Geo_Score"></activity>
+        <activity android:name=".Inscription"></activity>
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
@@ -31,9 +30,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity">
-
-        </activity>
+        <activity android:name=".MainActivity"></activity>
     </application>
 
 </manifest>

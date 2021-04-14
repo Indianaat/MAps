@@ -9,6 +9,7 @@ package com.example.geo;
 import androidx.fragment.app.FragmentActivity;
 
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.Log;
@@ -50,12 +51,13 @@ public class Geo extends FragmentActivity implements OnMapReadyCallback {
     TextView cityChosenView, txtNumQuest;
     Double distance, score;
     Button btnNext;
-    Integer numQuestion =0;
+    Integer numQuestion =1;
     Marker markerPointChoisi, markerVilleATrouver;
     Polyline distancePoly;
     LatLng cooPointChoisi, cooVilleATrouver;
     private Geo geoActivity;
-
+    ArrayList <Double> listeScore = new ArrayList<>();
+    ArrayList <Double> listeDistance = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -122,6 +124,7 @@ public class Geo extends FragmentActivity implements OnMapReadyCallback {
 
         //supression des anciens  markeur et lignes
         if (markerPointChoisi != null){
+            Log.v("TZZSYGREUYHEZGVY","ALED");
             markerPointChoisi.remove();
         }
         if (distancePoly != null){
@@ -176,7 +179,7 @@ public class Geo extends FragmentActivity implements OnMapReadyCallback {
 
                     //calcul de la distance entre les 2 points
                     distance = SphericalUtil.computeDistanceBetween(cooPointChoisi, cooVilleATrouver);
-
+                    listeDistance.add(distance);
                     //Affichage du trait reliant les 2 positions
                     gestionMap.TracerDistance(cooPointChoisi,cooPointChoisi);
                     // Ajout du marker de la ville à trouver
@@ -186,6 +189,7 @@ public class Geo extends FragmentActivity implements OnMapReadyCallback {
                     // Toast de la distance
                     //Toast.makeText(Geo.this,"Distance \n " + String.format("%.2f", distance / 1000) + "km",Toast.LENGTH_LONG).show();
                     score = 5000/(1+((distance/1000)/100) );
+                    listeScore.add(score);
 
 
                     //PopUP
@@ -226,6 +230,14 @@ public class Geo extends FragmentActivity implements OnMapReadyCallback {
                     cooVilleATrouver = Mapcity.get(arrayVille.get(CityChosen));
                     numQuestion = numQuestion+1;
                     txtNumQuest.setText(numQuestion.toString() + "/ 5");
+                }else {
+                    btnNext.setText("Voir score");
+                    Intent i= new Intent(Geo.this,Geo_Score.class);
+                    Bundle b = new Bundle();
+                    b.putSerializable("arrayScore",listeScore);
+                    b.putSerializable("arrayDistance",listeDistance);
+                    i.putExtras(b);
+                    startActivity(i);
                 }
             }
         });
