@@ -12,7 +12,7 @@
         android:orientation="vertical">
 
         <Button
-            android:id="@+id/Duo"
+            android:id="@+id/boutonInd1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/bouton"
@@ -24,7 +24,7 @@
             app:backgroundTint="@color/white" />
 
         <Button
-            android:id="@+id/Carre"
+            android:id="@+id/boutonInd2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/bouton"

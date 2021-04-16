@@ -17,7 +17,7 @@
         tools:ignore="MissingConstraints">
 
         <Button
-            android:id="@+id/Duo"
+            android:id="@+id/boutonInd1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/bouton"
@@ -29,7 +29,7 @@
             app:backgroundTint="@color/white" />
 
         <Button
-            android:id="@+id/Carre"
+            android:id="@+id/boutonInd2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/bouton"
@@ -50,7 +50,7 @@
         app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
 
         <Button
-            android:id="@+id/Cash"
+            android:id="@+id/boutonInd3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/bouton"
@@ -61,7 +61,7 @@
             app:backgroundTint="@color/white" />
 
         <Button
-            android:id="@+id/Autres"
+            android:id="@+id/boutonInd4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/bouton"

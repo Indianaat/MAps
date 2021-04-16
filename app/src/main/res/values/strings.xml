@@ -12,5 +12,7 @@
     <string name="logfailed">Login ou mot de passe incorrect</string>
     <string name="google_maps_key">AIzaSyDA7L_lmIAtkTJjeFk02xIoIOYBuNQcGM8</string>
     <string name="txtCash">Entrez votre solution</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

@@ -53,14 +53,12 @@ public class Quiz extends AppCompatActivity{
     private static final String TAG = "Log: ";
     ImageView imageQuiz;
     TextView questions, numQuestion;
-    Button option1, option2, option3, option4;
-
-    Fragment fragment;
+    Button boutonDuo, boutonCarre, boutonCash;
 
     int compteur = 0;
     int score = 0;
     int maxquestions = 10;
-    int idQuestion;
+    private int idQuestion;
     int totalQuestions = 11;
 
     DatabaseReference databaseReference;
@@ -74,59 +72,32 @@ public class Quiz extends AppCompatActivity{
         numQuestion = findViewById(R.id.numQuest);
         imageQuiz = findViewById(R.id.ImageQuiz);
         questions = findViewById(R.id.Question);
-        option1 = findViewById(R.id.Duo);
-        option2 = findViewById(R.id.Carre);
-        option3 = findViewById(R.id.Cash);
-        option4 = findViewById(R.id.Autres);
+        boutonDuo = findViewById(R.id.Duo);
+        boutonCarre = findViewById(R.id.Carre);
+        boutonCash = findViewById(R.id.Cash);
 
         firestore = FirebaseFirestore.getInstance();
-        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         score = 0;
+
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-
-        option1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                DuoFragment fragmDuo = new DuoFragment();
-                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-                transaction.replace(R.id.linearLayoutfra, fragmDuo);
-                transaction.commit();
-            }
-        });
-        option2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                CarreFragment fragmCarre = new CarreFragment();
-                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-                transaction.replace(R.id.linearLayoutfra, fragmCarre);
-                transaction.commit();
-            }
-        });
-        option3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                CashFragment fragmCash = new CashFragment();
-                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-                transaction.replace(R.id.linearLayoutfra, fragmCash);
-                transaction.commit();
-            }
-        });
-        //lancementQuiz();
+        lancementQuiz();
     }
 
 
-/*
+
     // Lancement du quiz
     public void lancementQuiz() {
+        choixSolution();
+        fragmentvide();
         compteur++;
         idQuestion = genereRandom(1, totalQuestions+1);
         Log.d(TAG, idQuestion+ "");
 
-        if (compteur > maxquestions  ) {       // le quiz s'arrête au bout de n questions (n = maxquestions)
+        if (compteur > maxquestions) {       // le quiz s'arrête au bout de n questions (n = maxquestions)
 
             Toast.makeText(getApplicationContext(), "Fin du quiz", Toast.LENGTH_SHORT).show();
             popupFinQuiz();
@@ -142,114 +113,10 @@ public class Quiz extends AppCompatActivity{
                     final Question question = dataSnapshot.getValue(Question.class);
                     // Récupération de la question --> écrit la question dans le textView
                     questions.setText(question.getQuestion());
-                    // Récupération des options de réponses --> écrit l'option dans le texte du bouton
-                    option1.setText(question.getOption1());
-                    option2.setText(question.getOption2());
-                    option3.setText(question.getOption3());
-                    option4.setText(question.getOption4());
+
                     // Ajout du changement d'image avec Picasso
                     Picasso.get().load(question.getImage()).into(imageQuiz);
-
-                    // L'utilisateur clique sur le 1er bouton
-                    option1.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            //Envoi de l'intent à l'activity quiz
-                            Intent i= new Intent(Quiz.this,CarreFragment.class);
-                            //lancement de l'activity Quiz
-                            startActivity(i);
-                        }
-                    });
-
-                    // L'utilisateur clique sur le 2eme bouton
-                    option2.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            // Vérification si option2 corresponds à la réponse
-                            if (option2.getText().toString().equals(question.answer)) {
-                                score ++;
-                                Toast.makeText(getApplicationContext(), "Correct", Toast.LENGTH_SHORT).show();
-
-                                Handler handler = new Handler();
-
-                                handler.postDelayed(new Runnable() {
-                                    public void run() {
-                                        lancementQuiz();     // Lance la prochaine question si le nombre max n'est pas atteint
-                                    }
-                                }, 2000);
-
-                            } else {
-                                Toast.makeText(getApplicationContext(), "Incorrect", Toast.LENGTH_SHORT).show();
-
-                                Handler handler = new Handler();
-
-                                handler.postDelayed(new Runnable() {
-                                    public void run() {
-                                        lancementQuiz();
-                                    }
-                                }, 1500);
-
-                            }
-                        }
-                    });
-
-                    // L'utilisateur clique sur le 3eme bouton
-                    option3.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            // Vérification si option3 corresponds à la réponse
-                            if (option3.getText().toString().equals(question.answer)) {
-                                score++;
-                                Toast.makeText(getApplicationContext(), "Correct answer", Toast.LENGTH_SHORT).show();
-
-                                Handler handler = new Handler();
-
-                                handler.postDelayed(new Runnable() {
-                                    public void run() {
-                                        lancementQuiz();
-                                    }
-                                }, 2000);
-                            } else {
-                                Toast.makeText(getApplicationContext(), "Incorrect", Toast.LENGTH_SHORT).show();
-
-                                Handler handler = new Handler();
-                                handler.postDelayed(new Runnable() {
-                                    public void run() {
-                                        lancementQuiz();
-                                    }
-                                }, 1500);
-                            }
-                        }
-                    });
-                    option4.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            // Vérification si option3 corresponds à la réponse
-                            if (option4.getText().toString().equals(question.answer)) {
-                                score++;
-                                Toast.makeText(getApplicationContext(), "Correct answer", Toast.LENGTH_SHORT).show();
-
-                                Handler handler = new Handler();
-
-                                handler.postDelayed(new Runnable() {
-                                    public void run() {
-                                        lancementQuiz();
-                                    }
-                                }, 2000);
-                            } else {
-                                Toast.makeText(getApplicationContext(), "Incorrect", Toast.LENGTH_SHORT).show();
-
-                                Handler handler = new Handler();
-                                handler.postDelayed(new Runnable() {
-                                    public void run() {
-                                        lancementQuiz();
-                                    }
-                                }, 1500);
-                            }
-                        }
-                    });
                 }
-
                 @Override
                 public void onCancelled(@NonNull DatabaseError databaseError) {
 
@@ -293,9 +160,45 @@ public class Quiz extends AppCompatActivity{
         idQuestion = borneMin+random.nextInt(borneMax-borneMin);
         return idQuestion;
     }
+    public int getIdQuestion() {
+        return idQuestion;
+    }
+    public void choixSolution(){
 
- */
-
+        boutonDuo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DuoFragment fragmDuo = new DuoFragment();
+                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                transaction.replace(R.id.linearLayoutfra, fragmDuo);
+                transaction.commit();
+            }
+        });
+        boutonCarre.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CarreFragment fragmCarre = new CarreFragment();
+                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                transaction.replace(R.id.linearLayoutfra, fragmCarre);
+                transaction.commit();
+            }
+        });
+        boutonCash.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CashFragment fragmCash = new CashFragment();
+                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                transaction.replace(R.id.linearLayoutfra, fragmCash);
+                transaction.commit();
+            }
+        });
+    }
+    public void fragmentvide(){
+        BlankFragment blankFragment = new BlankFragment();
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.linearLayoutfra, blankFragment);
+        transaction.commit();
+    }
 }
 
 
