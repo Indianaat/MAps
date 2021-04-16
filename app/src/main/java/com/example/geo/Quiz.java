@@ -8,6 +8,9 @@ package com.example.geo;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.viewpager.widget.ViewPager;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
@@ -45,13 +48,14 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
-public class Quiz extends AppCompatActivity {
+public class Quiz extends AppCompatActivity{
 
     private static final String TAG = "Log: ";
     ImageView imageQuiz;
     TextView questions, numQuestion;
     Button option1, option2, option3, option4;
-    List listQuestion = Arrays.asList();
+
+    Fragment fragment;
 
     int compteur = 0;
     int score = 0;
@@ -83,9 +87,39 @@ public class Quiz extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        lancementQuiz();
+
+        option1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DuoFragment fragmDuo = new DuoFragment();
+                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                transaction.replace(R.id.linearLayoutfra, fragmDuo);
+                transaction.commit();
+            }
+        });
+        option2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CarreFragment fragmCarre = new CarreFragment();
+                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                transaction.replace(R.id.linearLayoutfra, fragmCarre);
+                transaction.commit();
+            }
+        });
+        option3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CashFragment fragmCash = new CashFragment();
+                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                transaction.replace(R.id.linearLayoutfra, fragmCash);
+                transaction.commit();
+            }
+        });
+        //lancementQuiz();
     }
 
+
+/*
     // Lancement du quiz
     public void lancementQuiz() {
         compteur++;
@@ -120,30 +154,10 @@ public class Quiz extends AppCompatActivity {
                     option1.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            // Vérification si option1 corresponds à la réponse
-                            if (option1.getText().toString().equals(question.answer)) {     // Si correct
-                                Toast.makeText(getApplicationContext(), "Correct", Toast.LENGTH_SHORT).show();
-                                score ++;   // Score + 1
-
-                                Handler handler = new Handler();
-
-                                handler.postDelayed(new Runnable() {
-                                    public void run() {
-                                        lancementQuiz();    // Lance la prochaine question si le nombre max n'est pas atteint
-                                    }
-                                }, 1500);
-
-                            } else {
-                                Toast.makeText(getApplicationContext(), "Incorrect", Toast.LENGTH_SHORT).show();
-
-                                Handler handler = new Handler();
-
-                                handler.postDelayed(new Runnable() {
-                                    public void run() {
-                                        lancementQuiz();
-                                    }
-                                }, 1500);
-                            }
+                            //Envoi de l'intent à l'activity quiz
+                            Intent i= new Intent(Quiz.this,CarreFragment.class);
+                            //lancement de l'activity Quiz
+                            startActivity(i);
                         }
                     });
 
@@ -279,5 +293,9 @@ public class Quiz extends AppCompatActivity {
         idQuestion = borneMin+random.nextInt(borneMax-borneMin);
         return idQuestion;
     }
+
+ */
+
 }
+
 

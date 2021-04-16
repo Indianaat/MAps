@@ -8,7 +8,7 @@
     tools:context=".Quiz">
 
     <LinearLayout
-        android:id="@+id/linearLayout"
+        android:id="@+id/linearLayoutQuestion"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -30,7 +30,7 @@
         <ImageView
             android:id="@+id/ImageQuiz"
             android:layout_width="wrap_content"
-            android:layout_height="280dp"
+            android:layout_height="275dp"
             android:layout_gravity="center"
             app:srcCompat="@drawable/tour_effeil" />
 
@@ -43,69 +43,86 @@
             android:text="Question"
             android:textColor="@color/white"
             android:textSize="19dp" />
-
-
     </LinearLayout>
 
+
     <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginLeft="24dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginRight="24dp"
-        android:layout_marginBottom="16dp"
+        android:id="@+id/linearLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayoutQuestion"
+        tools:ignore="MissingConstraints">
+
+        <Button
+            android:id="@+id/Duo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@drawable/bouton"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="Duo"
+            android:textColor="@color/vert_principal"
+            app:backgroundTint="@color/white" />
+
+        <Button
+            android:id="@+id/Carre"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@drawable/bouton"
+            android:padding="10dp"
+            android:text="Carré"
+            android:textColor="@color/vert_principal"
+            app:backgroundTint="@color/white" />
+
+        <Button
+            android:id="@+id/Cash"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@drawable/bouton"
+            android:padding="10dp"
+            android:text="Cash"
+            android:textColor="@color/vert_principal"
+            app:backgroundTint="@color/white" />
+    </LinearLayout>
+
+    <!--    <fragment
+            android:name="com.example.geo.CarreFragment"
+            android:id="@+id/CarreFragment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+        <fragment
+            android:name="com.example.geo.DuoFragment"
+            android:id="@+id/DuoFragment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+    -->
+
+    <LinearLayout
+        android:id="@+id/linearLayoutfra"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout">
 
-        <Button
-            android:id="@+id/Duo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="Duo"
-            android:padding="10dp"
-            android:background="@drawable/bouton"
-            android:layout_marginBottom="16dp"
-            android:layout_marginTop="16dp"
-            android:textColor="@color/vert_principal"
-            app:backgroundTint="@color/white" />
 
-        <Button
-            android:id="@+id/Carre"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Carré"
-            android:padding="10dp"
-            android:background="@drawable/bouton"
-            android:layout_marginBottom="16dp"
-            android:textColor="@color/vert_principal"
-            app:backgroundTint="@color/white" />
-
-        <Button
-            android:id="@+id/Cash"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Cash"
-            android:padding="10dp"
-            android:background="@drawable/bouton"
-            android:layout_marginBottom="16dp"
-            android:textColor="@color/vert_principal"
-            app:backgroundTint="@color/white" />
-        <Button
-            android:id="@+id/Autres"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Autres"
-            android:padding="10dp"
-            android:background="@drawable/bouton"
-            android:layout_marginBottom="16dp"
-            android:textColor="@color/vert_principal"
-            app:backgroundTint="@color/white" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
