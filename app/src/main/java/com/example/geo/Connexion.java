@@ -16,7 +16,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -29,7 +28,7 @@ public class Connexion extends AppCompatActivity {
     EditText login, password;
     ProgressBar progressBar;
     FirebaseAuth fAuth;
-
+    InfoUtilisateur infoUtilisateur;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,7 +37,7 @@ public class Connexion extends AppCompatActivity {
         password = findViewById(R.id.password);
         progressBar = findViewById(R.id.progressBar2);
         fAuth = FirebaseAuth.getInstance();
-
+        infoUtilisateur = (InfoUtilisateur) getApplicationContext();
     }
 
     // lien pour s'enregistrer sans les scores
@@ -87,6 +86,9 @@ public class Connexion extends AppCompatActivity {
                     Intent i= new Intent(Connexion.this,Accueil.class);
                     i.putExtra("msg",login.getText().toString());
                     //lancement de l'activity Accueil
+                    infoUtilisateur.setMdpUser(pwd);
+                    infoUtilisateur.setEmailUser(mlogin);
+                    Log.v("test",infoUtilisateur.getEmailUser());
                     startActivity(i);
                 }else {
                     Toast.makeText(getApplicationContext(),getResources().getString(R.string.logfailed),Toast.LENGTH_LONG).show();

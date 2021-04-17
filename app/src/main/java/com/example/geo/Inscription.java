@@ -38,7 +38,7 @@ public class Inscription extends AppCompatActivity {
     FirebaseAuth fAuth;
     ProgressBar progressBar;
     FirebaseFirestore fStore;
-    String userID;
+    InfoUtilisateur infoUtilisateur;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +50,7 @@ public class Inscription extends AppCompatActivity {
         mPassword   = findViewById(R.id.password);
         mRegisterBtn= findViewById(R.id.registerBtn);
         mLoginBtn   = findViewById(R.id.createText);
-
+        infoUtilisateur = (InfoUtilisateur) getApplicationContext();
         fAuth = FirebaseAuth.getInstance();
         fStore = FirebaseFirestore.getInstance();
         progressBar = findViewById(R.id.progressBar);
@@ -106,15 +106,15 @@ public class Inscription extends AppCompatActivity {
                                 }
                             });
                             Toast.makeText(Inscription.this, "Utilisateur Créé.", Toast.LENGTH_SHORT).show();
-                            userID = fAuth.getCurrentUser().getUid();
-                            DocumentReference documentReference = fStore.collection("users").document(userID);
+                            DocumentReference documentReference = fStore.collection("users").document(email);
                             Map<String,Object> user = new HashMap<>();
                             user.put("fPseudo",pseudo);
                             user.put("email",email);
+                            user.put("mdp",password);
                             documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void aVoid) {
-                                    Log.d(TAG, "onSuccess: user Profile is created for "+ userID);
+                                    Log.d(TAG, "onSuccess: user Profile is created for "+ pseudo2);
                                 }
                             }).addOnFailureListener(new OnFailureListener() {
                                 @Override
@@ -122,6 +122,10 @@ public class Inscription extends AppCompatActivity {
                                     Log.d(TAG, "onFailure: " + e.toString());
                                 }
                             });
+                            infoUtilisateur.setEmailUser(email);
+                            infoUtilisateur.setMdpUser(password);
+                            infoUtilisateur.setPseudoUser(pseudo2);
+                            infoUtilisateur.setIdUSer(email);
                             startActivity(new Intent(getApplicationContext(),Accueil.class));
                         }else {
                             Toast.makeText(Inscription.this, "Erreur ! " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();

@@ -11,6 +11,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+        android:name=".InfoUtilisateur"
         android:theme="@style/Theme.Geo">
         <activity android:name=".Geo_Score"></activity>
         <activity android:name=".Inscription"></activity>
