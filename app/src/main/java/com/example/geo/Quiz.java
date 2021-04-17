@@ -47,7 +47,7 @@ public class Quiz extends AppCompatActivity{
     public int score = 0;
     int maxquestions = 10;
     private int idQuestion;
-    int totalQuestions = 11;
+    int totalQuestions = 31; // Nombre de question dans la BDD
 
     DatabaseReference databaseReference;
     FirebaseFirestore firestore;
