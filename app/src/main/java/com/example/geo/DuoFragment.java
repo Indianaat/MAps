@@ -26,7 +26,7 @@ public class DuoFragment extends Fragment {
     private static final String TAG = "Log: ";
 
     boolean place;
-    int scoreDuo = 75;
+    int scoreDuo = 25;
 
     View view;
     Button indice1;
@@ -69,7 +69,7 @@ public class DuoFragment extends Fragment {
                     indice1.setText(question.getAnswer());
                     indice2.setText(question.getOption2());
                 } else {
-                    indice1.setText(question.getOption2());
+                    indice1.setText(question.getOption1());
                     indice2.setText(question.getAnswer());
                 }
 
