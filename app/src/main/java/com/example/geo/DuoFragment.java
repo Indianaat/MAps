@@ -25,64 +25,66 @@ import java.util.Random;
 public class DuoFragment extends Fragment {
     private static final String TAG = "Log: ";
 
-    String reponse;
+    boolean place;
+    int scoreDuo = 75;
+
     View view;
-    String indiceRandom;
+    Button indice1;
+    Button indice2;
+
     DatabaseReference databaseReference;
 
     public DuoFragment() {
         // Required empty public constructor
     }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         view = inflater.inflate(R.layout.fragment_duo, container, false);
 
-
         indiceDuo();
         // Inflate the layout for this fragment
         return view;
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        indiceDuo();
-    }
-
     public void indiceDuo(){
 
         Quiz quizActivity = (Quiz) getActivity();
-        Button indice1 = view.findViewById(R.id.boutonInd1);
-        Button indice2 = view.findViewById(R.id.boutonInd2);
-        int idQuestion = quizActivity.getIdQuestion();
 
-// Chemin pour récupérer les question : Question + numéro
+        indice1 = view.findViewById(R.id.boutonInd1);
+        indice2 = view.findViewById(R.id.boutonInd2);
+
+        int idQuestion = quizActivity.getIdQuestion(); //Récupère l'ID dans l'activité Quiz
+
+        // Chemin pour récupérer les question : Question + numéro
         databaseReference = FirebaseDatabase.getInstance().getReference().child("questions").child(String.valueOf(idQuestion));
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 final Question question = dataSnapshot.getValue(Question.class);
-                // Récupération des options de réponses --> écrit l'option dans le texte du bouton
-
-                indice1.setText(question.getOption1());
-                indice2.setText(question.getOption2());
+                // Récupération des options de réponses --> écrit l'option dans le texte du bouton de manière aléatoire
+                if (genereRandom()){
+                    indice1.setText(question.getAnswer());
+                    indice2.setText(question.getOption2());
+                } else {
+                    indice1.setText(question.getOption2());
+                    indice2.setText(question.getAnswer());
+                }
 
                 // L'utilisateur clique sur le 1er bouton
                 indice1.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         if ( indice1.getText().toString().equals(question.getAnswer())) {
-                            Log.v(TAG, indice1.getText().toString() + "");
                             Toast.makeText(quizActivity.getApplicationContext(), "Correct", Toast.LENGTH_SHORT).show();
-                            quizActivity.score = quizActivity.score + 75;
+                            quizActivity.score = quizActivity.score + scoreDuo;
                             Handler handler = new Handler();
 
                             handler.postDelayed(new Runnable() {
                                 public void run() {
                                     quizActivity.lancementQuiz();     // Lance la prochaine question si le nombre max n'est pas atteint
-                                    indiceDuo();
                                 }
                             }, 2000);
                         } else {
@@ -92,25 +94,25 @@ public class DuoFragment extends Fragment {
 
                             handler.postDelayed(new Runnable() {
                                 public void run() {
-                                    quizActivity.lancementQuiz();
-                                    indiceDuo();
+                                    quizActivity.lancementQuiz();   // Lance la prochaine question si le nombre max n'est pas atteint
                                 }
                             }, 1500);
                         }
                     }
                 });
+
+                // L'utilisateur clique sur le 2eme bouton
                 indice2.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         if ( indice2.getText().toString().equals(question.answer)) {
                             Toast.makeText(quizActivity.getApplicationContext(), "Correct", Toast.LENGTH_SHORT).show();
-                            quizActivity.score = quizActivity.score + 75;
+                            quizActivity.score = quizActivity.score + scoreDuo;
                             Handler handler = new Handler();
 
                             handler.postDelayed(new Runnable() {
                                 public void run() {
                                     quizActivity.lancementQuiz();     // Lance la prochaine question si le nombre max n'est pas atteint
-                                    indiceDuo();
                                 }
                             }, 2000);
                         } else {
@@ -120,8 +122,7 @@ public class DuoFragment extends Fragment {
 
                             handler.postDelayed(new Runnable() {
                                 public void run() {
-                                    quizActivity.lancementQuiz();
-                                    indiceDuo();
+                                    quizActivity.lancementQuiz();   // Lance la prochaine question si le nombre max n'est pas atteint
                                 }
                             }, 1500);
                         }
@@ -131,9 +132,15 @@ public class DuoFragment extends Fragment {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
             }
         });
 
+    }
+
+    // Méthode pour générer un boolean aléatoirement pour mélanger les indices
+    public boolean genereRandom(){
+        Random random = new Random();
+        place = random.nextBoolean();
+        return place;
     }
 }

@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
 import android.annotation.SuppressLint;
@@ -51,6 +52,7 @@ import java.util.Random;
 public class Quiz extends AppCompatActivity{
 
     private static final String TAG = "Log: ";
+
     ImageView imageQuiz;
     TextView questions, numQuestion;
     Button boutonDuo, boutonCarre, boutonCash;
@@ -91,10 +93,18 @@ public class Quiz extends AppCompatActivity{
 
     // Lancement du quiz
     public void lancementQuiz() {
-        choixSolution();
-        fragmentvide();
-        compteur++;
-        idQuestion = genereRandom(1, totalQuestions+1);
+
+        // Rendre les boutons Duo, Carré, Cash visible
+        boutonDuo.setVisibility(View.VISIBLE);
+        boutonCarre.setVisibility(View.VISIBLE);
+        boutonCash.setVisibility(View.VISIBLE);
+
+        choixSolution(); // Choix entre Duo, Carré, Cash et apparition du fragment correspondant
+        fragmentvide(); // Affichage du fragment présentation du jeu par défault
+
+        compteur++; // Incrémentation du compteur de tours joué
+
+        idQuestion = genereRandom(1, totalQuestions+1);  // Génération d'une question aléatoire correspondant à son ID dans la BDD
         Log.d(TAG, idQuestion+ "");
 
         if (compteur > maxquestions) {       // le quiz s'arrête au bout de n questions (n = maxquestions)
@@ -104,8 +114,9 @@ public class Quiz extends AppCompatActivity{
 
         } else {        //Si le nombre de questions max n'est pas atteint:
 
-            numQuestion.setText(compteur + "/" + maxquestions);
-            // Chemin pour récupérer les question : Question + numéro
+            numQuestion.setText(compteur + "/" + maxquestions); // Affichage du nombre de tours joué
+
+            // Chemin pour récupérer les questions : Question + numéro
             databaseReference = FirebaseDatabase.getInstance().getReference().child("questions").child(String.valueOf(idQuestion));
             databaseReference.addValueEventListener(new ValueEventListener() {
                 @Override
@@ -125,12 +136,14 @@ public class Quiz extends AppCompatActivity{
         }
     }
 
+    // Popup de fin qui affiche le score du joueur
     public void popupFinQuiz(){
 
-        //popup fin de quiz
         AlertDialog.Builder scorePopup = new AlertDialog.Builder(this);
+
         scorePopup.setTitle("Votre Score:");
         scorePopup.setMessage(score + " points");
+
         // Bouton sur le popup suivant --> renvoi vers l'Accueil (choix mini jeux)
         scorePopup.setPositiveButton("Suivant", new DialogInterface.OnClickListener() {
             @Override
@@ -142,6 +155,7 @@ public class Quiz extends AppCompatActivity{
                 startActivity(i);
             }
         });
+
         // Bouton sur le popup Rejouer --> relance le quiz
         scorePopup.setNegativeButton("Rejouer", new DialogInterface.OnClickListener() {
             @Override
@@ -155,19 +169,29 @@ public class Quiz extends AppCompatActivity{
         });
         scorePopup.show();
     }
+
+    // Méthode pour générer un nombre aléatoire
     public int genereRandom(int borneMin , int borneMax){ // Génération d'un idQuestions aléatoire
         Random random = new Random();
         idQuestion = borneMin+random.nextInt(borneMax-borneMin);
         return idQuestion;
     }
+
+    // Getter pour récupérer l'id de la question de les fragments
     public int getIdQuestion() {
         return idQuestion;
     }
+
+    // Méthode pour le choix entre Duo, Carré, Cash et affichage du fragment
     public void choixSolution(){
 
         boutonDuo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                boutonCarre.setVisibility(View.GONE); // Désactive le bouton Carré
+                boutonCash.setVisibility(View.GONE); // Désactive le bouton Cash
+
+                // Affichage du fragment Duo dans le linear layout
                 DuoFragment fragmDuo = new DuoFragment();
                 FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
                 transaction.replace(R.id.linearLayoutfra, fragmDuo);
@@ -177,6 +201,10 @@ public class Quiz extends AppCompatActivity{
         boutonCarre.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                boutonDuo.setVisibility(View.GONE); // Désactive le bouton Duo
+                boutonCash.setVisibility(View.GONE); // Désactive le bouton Cash
+
+                // Affichage du fragment Carré dans le linear layout
                 CarreFragment fragmCarre = new CarreFragment();
                 FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
                 transaction.replace(R.id.linearLayoutfra, fragmCarre);
@@ -186,6 +214,10 @@ public class Quiz extends AppCompatActivity{
         boutonCash.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                boutonCarre.setVisibility(View.GONE); // Désactive le bouton Carré
+                boutonDuo.setVisibility(View.GONE); // Désactive le bouton Duo
+
+                // Affichage du fragment Cash dans le linear layout
                 CashFragment fragmCash = new CashFragment();
                 FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
                 transaction.replace(R.id.linearLayoutfra, fragmCash);
@@ -193,6 +225,8 @@ public class Quiz extends AppCompatActivity{
             }
         });
     }
+
+    // Fragment de départ
     public void fragmentvide(){
         BlankFragment blankFragment = new BlankFragment();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
