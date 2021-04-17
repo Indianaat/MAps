@@ -1,18 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-<<<<<<< HEAD
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".Duo">
-
-    <TextView
-        android:layout_width="451dp"
-        android:layout_height="match_parent"
-        android:text="OMG DUO">
-
-    </TextView>
-=======
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -47,6 +35,5 @@
             app:backgroundTint="@color/white" />
     </LinearLayout>
 
->>>>>>> 59edcdb2122d6e65997f003f0f24c205b1c1bc59
 
 </FrameLayout>

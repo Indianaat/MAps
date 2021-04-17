@@ -23,6 +23,7 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.type.Date;
 
+import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -56,7 +57,6 @@ public class Geo_Score extends AppCompatActivity {
         infoUtilisateur = (InfoUtilisateur) getApplicationContext();
 
         String userDB = String.format("users/"+infoUtilisateur.getEmailUser());
-        Log.v("OMGANSWSERE",userDB);
         noteRef = db.document(userDB);
         if (intent != null){
             Log.d("Intent", "Intent is not null :(");
@@ -82,13 +82,12 @@ public class Geo_Score extends AppCompatActivity {
         startActivity(i);
     }
     public void SaveScore(){
-            String date= Long.toString(System.currentTimeMillis());
+        String date= DateFormat.getInstance().format(System.currentTimeMillis());
         sommeScore();
         Map<String,Object> scoreObject = new HashMap<>();
-        scoreObject.put(date,TotalScore);
+        scoreObject.put(date,Math.round(TotalScore));
         scoreObject.put("email",infoUtilisateur.getEmailUser());
         scoreObject.put("mdp",infoUtilisateur.getMdpUser());
-        scoreObject.put("fPseudo",infoUtilisateur.getPseudoUser());
             noteRef.set(scoreObject).addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
                 public void onSuccess(Void aVoid) {
