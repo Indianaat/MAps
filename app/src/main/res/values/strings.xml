@@ -11,7 +11,12 @@
     <string name="logok">Login et mot de passe corrects</string>
     <string name="logfailed">Login ou mot de passe incorrect</string>
     <string name="google_maps_key">AIzaSyDA7L_lmIAtkTJjeFk02xIoIOYBuNQcGM8</string>
+<<<<<<< HEAD
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+=======
+    <string name="txtCash">Entrez votre solution</string>
+    <string name="pres_quiz">Vous connaissez la réponse ? \n\nQue choisissez-vous ?\n Duo, Carré ou Cash?</string>
+>>>>>>> 59edcdb2122d6e65997f003f0f24c205b1c1bc59
 
 </resources>

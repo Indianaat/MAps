@@ -9,7 +9,7 @@
     tools:context=".Quiz">
 
     <LinearLayout
-        android:id="@+id/linearLayout"
+        android:id="@+id/linearLayoutQuestion"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@color/bleu_principal"
@@ -31,7 +31,7 @@
         <ImageView
             android:id="@+id/ImageQuiz"
             android:layout_width="wrap_content"
-            android:layout_height="280dp"
+            android:layout_height="275dp"
             android:layout_gravity="center"
             app:srcCompat="@drawable/tour_effeil" />
 
@@ -44,10 +44,9 @@
             android:text="Question"
             android:textColor="@color/white"
             android:textSize="19dp" />
-
-
     </LinearLayout>
 
+<<<<<<< HEAD
     <Button
         android:id="@+id/duo"
         android:layout_width="wrap_content"
@@ -107,54 +106,65 @@
         android:layout_marginBottom="16dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
+=======
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+>>>>>>> 59edcdb2122d6e65997f003f0f24c205b1c1bc59
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+        app:layout_constraintTop_toBottomOf="@+id/linearLayoutQuestion"
+        tools:ignore="MissingConstraints">
 
         <Button
             android:id="@+id/Duo"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="Duo"
-            android:padding="10dp"
+            android:layout_margin="10dp"
             android:background="@drawable/bouton"
-            android:layout_marginBottom="16dp"
-            android:layout_marginTop="16dp"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="Duo"
             android:textColor="@color/vert_principal"
             app:backgroundTint="@color/white" />
 
         <Button
             android:id="@+id/Carre"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Carré"
-            android:padding="10dp"
+            android:layout_margin="10dp"
             android:background="@drawable/bouton"
-            android:layout_marginBottom="16dp"
+            android:padding="10dp"
+            android:text="Carré"
             android:textColor="@color/vert_principal"
             app:backgroundTint="@color/white" />
 
         <Button
             android:id="@+id/Cash"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@drawable/bouton"
+            android:padding="10dp"
             android:text="Cash"
-            android:padding="10dp"
-            android:background="@drawable/bouton"
-            android:layout_marginBottom="16dp"
-            android:textColor="@color/vert_principal"
-            app:backgroundTint="@color/white" />
-        <Button
-            android:id="@+id/Autres"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Autres"
-            android:padding="10dp"
-            android:background="@drawable/bouton"
-            android:layout_marginBottom="16dp"
             android:textColor="@color/vert_principal"
             app:backgroundTint="@color/white" />
     </LinearLayout>-->
+
+    <LinearLayout
+        android:id="@+id/linearLayoutfra"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+<<<<<<< HEAD
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Duo">
@@ -11,5 +12,41 @@
         android:text="OMG DUO">
 
     </TextView>
+=======
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".DuoFragment">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/boutonInd1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bouton"
+            android:gravity="center"
+            android:padding="10dp"
+            android:layout_margin="10dp"
+            android:text="truc"
+            android:textColor="@color/vert_principal"
+            app:backgroundTint="@color/white" />
+
+        <Button
+            android:id="@+id/boutonInd2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bouton"
+            android:padding="10dp"
+            android:layout_margin="10dp"
+            android:text="Carré"
+            android:textColor="@color/vert_principal"
+            app:backgroundTint="@color/white" />
+    </LinearLayout>
+
+>>>>>>> 59edcdb2122d6e65997f003f0f24c205b1c1bc59
 
 </FrameLayout>
