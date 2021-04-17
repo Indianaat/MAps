@@ -1,4 +1,4 @@
-package com.example.geo;
+package com.example.geo.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -14,8 +14,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.geo.Accueil;
+import com.example.geo.Connexion;
+import com.example.geo.R;
+import com.example.geo.model.InfoUtilisateur;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -28,7 +31,6 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
 import java.util.Map;
-import android.os.Bundle;
 
 public class Inscription extends AppCompatActivity {
     public static final String TAG = "TAG";
@@ -108,7 +110,7 @@ public class Inscription extends AppCompatActivity {
                             Toast.makeText(Inscription.this, "Utilisateur Créé.", Toast.LENGTH_SHORT).show();
                             DocumentReference documentReference = fStore.collection("users").document(email);
                             Map<String,Object> user = new HashMap<>();
-                            user.put("fPseudo",pseudo);
+                            user.put("fPseudo",pseudo2);
                             user.put("email",email);
                             user.put("mdp",password);
                             documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -125,6 +127,7 @@ public class Inscription extends AppCompatActivity {
                             infoUtilisateur.setEmailUser(email);
                             infoUtilisateur.setMdpUser(password);
                             infoUtilisateur.setPseudoUser(pseudo2);
+                            Log.v("test",infoUtilisateur.getPseudoUser());
                             infoUtilisateur.setIdUSer(email);
                             startActivity(new Intent(getApplicationContext(),Accueil.class));
                         }else {
@@ -139,7 +142,7 @@ public class Inscription extends AppCompatActivity {
         mLoginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(),Connexion.class));
+                startActivity(new Intent(getApplicationContext(), Connexion.class));
             }
         });
     }

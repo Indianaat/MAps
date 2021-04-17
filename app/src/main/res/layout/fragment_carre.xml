@@ -6,7 +6,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    tools:context=".CarreFragment">
+    tools:context=".Fragment.CarreFragment">
 
     <LinearLayout
         android:id="@+id/linearLayout2"

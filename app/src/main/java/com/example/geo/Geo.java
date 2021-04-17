@@ -152,7 +152,7 @@ public class Geo extends FragmentActivity implements OnMapReadyCallback {
 
         // Choix random de la ville
         Random rand = new Random();
-        CityChosen = rand.nextInt(Mapcity.size()+1);
+        CityChosen = rand.nextInt(Mapcity.size());
         cityChosenView.setText(arrayVille.get(CityChosen)); // affichage de la ville a choisir
         cooVilleATrouver = Mapcity.get(arrayVille.get(CityChosen));
 

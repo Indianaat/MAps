@@ -18,6 +18,8 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.example.geo.activity.Inscription;
+import com.example.geo.model.InfoUtilisateur;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -48,7 +50,7 @@ public class Connexion extends AppCompatActivity {
     }
     // text pour créer un compte
     public void actCreeCompte(View v){
-        Intent i= new Intent(Connexion.this,Inscription.class);
+        Intent i= new Intent(Connexion.this, Inscription.class);
         i.putExtra("msg","Veuillez créer un compte");
         startActivity(i);
     }

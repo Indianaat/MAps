@@ -5,23 +5,17 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.SystemClock;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.geo.model.InfoUtilisateur;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.type.Date;
 
 import java.text.DateFormat;
 import java.util.ArrayList;
@@ -85,9 +79,11 @@ public class Geo_Score extends AppCompatActivity {
         String date= DateFormat.getInstance().format(System.currentTimeMillis());
         sommeScore();
         Map<String,Object> scoreObject = new HashMap<>();
-        scoreObject.put(date,Math.round(TotalScore));
+        scoreObject.put("score",Math.round(TotalScore));
+        scoreObject.put("dateScore",date);
         scoreObject.put("email",infoUtilisateur.getEmailUser());
         scoreObject.put("mdp",infoUtilisateur.getMdpUser());
+        scoreObject.put("fPseudo",infoUtilisateur.getPseudoUser());
             noteRef.set(scoreObject).addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
                 public void onSuccess(Void aVoid) {

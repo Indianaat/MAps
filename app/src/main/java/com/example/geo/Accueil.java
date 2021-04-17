@@ -12,6 +12,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import com.example.geo.activity.Score;
+
 public class Accueil extends AppCompatActivity {
 
     @Override
@@ -39,7 +41,7 @@ public class Accueil extends AppCompatActivity {
     // Bouton médaille --> lance la page des scores
     public void actScore(View v){
         //Envoi de l'intent à l'activity Score
-        Intent i= new Intent(Accueil.this,Score.class);
+        Intent i= new Intent(Accueil.this, Score.class);
         //lancement de l'activity Score
         startActivity(i);
     }

@@ -1,4 +1,4 @@
-package com.example.geo;
+package com.example.geo.model;
 
 import android.app.Application;
 

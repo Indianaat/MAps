@@ -1,4 +1,4 @@
-package com.example.geo;
+package com.example.geo.Fragment;
 
 import android.os.Bundle;
 
@@ -7,6 +7,8 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.example.geo.R;
 
 public class BlankFragment extends Fragment {
 

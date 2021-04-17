@@ -1,4 +1,4 @@
-package com.example.geo;
+package com.example.geo.Fragment;
 
 import android.os.Bundle;
 
@@ -13,6 +13,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.geo.Question;
+import com.example.geo.Quiz;
+import com.example.geo.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;

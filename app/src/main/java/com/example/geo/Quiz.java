@@ -8,10 +8,7 @@ package com.example.geo;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager.widget.ViewPager;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -24,6 +21,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.geo.Fragment.BlankFragment;
+import com.example.geo.Fragment.CarreFragment;
+import com.example.geo.Fragment.CashFragment;
+import com.example.geo.Fragment.DuoFragment;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -32,8 +33,6 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.squareup.picasso.Picasso;
 
-import java.util.Arrays;
-import java.util.List;
 import java.util.Random;
 
 public class Quiz extends AppCompatActivity{
@@ -45,7 +44,7 @@ public class Quiz extends AppCompatActivity{
     Button boutonDuo, boutonCarre, boutonCash;
 
     int compteur = 0;
-    int score = 0;
+    public int score = 0;
     int maxquestions = 10;
     private int idQuestion;
     int totalQuestions = 11;

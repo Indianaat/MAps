@@ -3,19 +3,18 @@
  Podium des scores des différents joueurs
  **/
 
-package com.example.geo;
+package com.example.geo.activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.nfc.Tag;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
 
+import com.example.geo.R;
+import com.example.geo.model.ScoreDB;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -23,12 +22,15 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
-import java.util.Map;
+import java.util.Collections;
 
 public class Score extends AppCompatActivity {
     FirebaseFirestore fStore;
-    ArrayList<Map> objScore = new ArrayList<>();
+    ArrayList<String> objScore = new ArrayList<>();
+    ArrayList<Integer> intScore = new ArrayList<>();
     ListView listViewScore;
+    ArrayList<ScoreDB> objtScoreDB = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,10 +43,16 @@ public class Score extends AppCompatActivity {
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {
                     for (QueryDocumentSnapshot document : task.getResult()) {
-                        Log.d("TAG", document.getId() + " => " + document.getData());
-                        objScore.add(document.getData());
+                        Log.d("TAG", document.getId() + " => " + document.getData().get("score"));
+                        Log.d("TAG2", document.getId() + " => " + document.getData().get("fPseudo"));
+                        if(document.getData().get("score") != null){
+                            objtScoreDB.add(new ScoreDB(  "" + document.getData().get("fPseudo"), (Long) document.getData().get("score")));
+                        }
+
                     }
-                    ArrayAdapter<Map> adapter = new ArrayAdapter<>(Score.this, android.R.layout.simple_list_item_1,objScore);
+                    Collections.sort(objtScoreDB);
+
+                    ArrayAdapter<ScoreDB> adapter = new ArrayAdapter<>(Score.this, android.R.layout.simple_list_item_1,objtScoreDB);
                     listViewScore.setAdapter(adapter);
                 } else {
                     Log.w("TAG", "Error getting documents.", task.getException());
