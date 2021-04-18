@@ -25,14 +25,24 @@ import com.example.geo.Fragment.BlankFragment;
 import com.example.geo.Fragment.CarreFragment;
 import com.example.geo.Fragment.CashFragment;
 import com.example.geo.Fragment.DuoFragment;
+import com.example.geo.model.InfoUtilisateur;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.squareup.picasso.Picasso;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 public class Quiz extends AppCompatActivity{
@@ -47,7 +57,11 @@ public class Quiz extends AppCompatActivity{
     public int score = 0;
     int maxquestions = 10;
     private int idQuestion;
-    int totalQuestions = 31; // Nombre de question dans la BDD
+    int totalQuestions = 40; // Nombre de question dans la BDD
+
+    InfoUtilisateur infoUtilisateur;
+    private DocumentReference noteRef ;
+    private FirebaseFirestore db =FirebaseFirestore.getInstance() ;
 
     DatabaseReference databaseReference;
     FirebaseFirestore firestore;
@@ -66,6 +80,7 @@ public class Quiz extends AppCompatActivity{
 
         firestore = FirebaseFirestore.getInstance();
         score = 0;
+
 
     }
 
@@ -94,7 +109,7 @@ public class Quiz extends AppCompatActivity{
         Log.d(TAG, idQuestion+ "");
 
         if (compteur > maxquestions) {       // le quiz s'arrête au bout de n questions (n = maxquestions)
-
+            loadScore();
             Toast.makeText(getApplicationContext(), "Fin du quiz", Toast.LENGTH_SHORT).show();
             popupFinQuiz();
 
@@ -218,6 +233,32 @@ public class Quiz extends AppCompatActivity{
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.linearLayoutfra, blankFragment);
         transaction.commit();
+    }
+    public void loadScore(){
+        infoUtilisateur = (InfoUtilisateur) getApplicationContext();
+        Map<String,Object> scoreObject = new HashMap<>();
+        FirebaseFirestore fStore;
+        String userDB = String.format("users/"+infoUtilisateur.getEmailUser());
+        noteRef = db.document(userDB);
+        fStore = FirebaseFirestore.getInstance();
+
+        infoUtilisateur.setScoreQuizz(score);
+        scoreObject.put("scoreQuiz",score);
+        scoreObject.put("email",infoUtilisateur.getEmailUser());
+        scoreObject.put("mdp",infoUtilisateur.getMdpUser());
+        scoreObject.put("fPseudo",infoUtilisateur.getPseudoUser());
+        scoreObject.put("scoreGeo",infoUtilisateur.getScoreGeo());
+        noteRef.set(scoreObject).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                Toast.makeText(Quiz.this," Score sauvegardé",Toast.LENGTH_SHORT);
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(Quiz.this," Echec ajout dans la bdd",Toast.LENGTH_SHORT);
+            }
+        });
     }
 }
 

@@ -43,10 +43,13 @@ public class Score extends AppCompatActivity {
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {
                     for (QueryDocumentSnapshot document : task.getResult()) {
-                        Log.d("TAG", document.getId() + " => " + document.getData().get("score"));
                         Log.d("TAG2", document.getId() + " => " + document.getData().get("fPseudo"));
-                        if(document.getData().get("score") != null){
-                            objtScoreDB.add(new ScoreDB(  "" + document.getData().get("fPseudo"), (Long) document.getData().get("score")));
+                        if(document.getData().get("scoreGeo") != null || document.getData().get("scoreQuiz") != null){
+
+                            Long scoreGeo =  document.getData().get("scoreGeo") != null ? (Long) document.getData().get("scoreGeo") : 0;
+                            Long scoreQuiz = document.getData().get("scoreQuiz") != null ? (Long) document.getData().get("scoreQuiz") : 0;
+                            Long sommeScore = scoreQuiz + scoreGeo;
+                            objtScoreDB.add(new ScoreDB(  "" + document.getData().get("fPseudo"),scoreGeo, scoreQuiz,sommeScore));
                         }
 
                     }

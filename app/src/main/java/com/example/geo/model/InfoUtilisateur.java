@@ -9,6 +9,25 @@ public class InfoUtilisateur extends Application {
     private String mdpUser;
     private String PseudoUser;
 
+    public Integer getScoreGeo() {
+        return ScoreGeo;
+    }
+
+    public void setScoreGeo(Integer scoreGeo) {
+        ScoreGeo = scoreGeo;
+    }
+
+    public Integer getScoreQuizz() {
+        return ScoreQuizz;
+    }
+
+    public void setScoreQuizz(Integer scoreQuizz) {
+        ScoreQuizz = scoreQuizz;
+    }
+
+    private Integer ScoreGeo=0;
+    private Integer ScoreQuizz=0;
+
     public String getIdUSer() {
         return idUSer;
     }

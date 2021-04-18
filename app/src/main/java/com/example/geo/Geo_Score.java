@@ -64,7 +64,6 @@ public class Geo_Score extends AppCompatActivity {
         }
         for (int i=0; i<listScore.size();i++){
             String objectDisplay = String.format("Manche %d\n %.2f Points   \n%.2f Kilometres",i,listScore.get(i),listDistance.get(i)/1000);
-            Log.v("OMG",objectDisplay);
             listDisplay.add(objectDisplay);
         }
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1,listDisplay);
@@ -79,11 +78,12 @@ public class Geo_Score extends AppCompatActivity {
         String date= DateFormat.getInstance().format(System.currentTimeMillis());
         sommeScore();
         Map<String,Object> scoreObject = new HashMap<>();
-        scoreObject.put("score",Math.round(TotalScore));
+        scoreObject.put("scoreGeo",Math.round(TotalScore));
         scoreObject.put("dateScore",date);
         scoreObject.put("email",infoUtilisateur.getEmailUser());
         scoreObject.put("mdp",infoUtilisateur.getMdpUser());
         scoreObject.put("fPseudo",infoUtilisateur.getPseudoUser());
+        scoreObject.put("scoreQuiz",infoUtilisateur.getScoreQuizz());
             noteRef.set(scoreObject).addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
                 public void onSuccess(Void aVoid) {
