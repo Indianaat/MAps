@@ -50,7 +50,7 @@ public class Quiz extends AppCompatActivity{
     private static final String TAG = "Log: ";
 
     ImageView imageQuiz;
-    TextView questions, numQuestion;
+    TextView questions, numQuestion, affScore;
     Button boutonDuo, boutonCarre, boutonCash;
 
     int compteur = 0;
@@ -77,6 +77,7 @@ public class Quiz extends AppCompatActivity{
         boutonDuo = findViewById(R.id.Duo);
         boutonCarre = findViewById(R.id.Carre);
         boutonCash = findViewById(R.id.Cash);
+        affScore = findViewById(R.id.affScore);
 
         firestore = FirebaseFirestore.getInstance();
         score = 0;
@@ -96,9 +97,8 @@ public class Quiz extends AppCompatActivity{
     public void lancementQuiz() {
 
         // Rendre les boutons Duo, Carré, Cash visible
-        boutonDuo.setVisibility(View.VISIBLE);
-        boutonCarre.setVisibility(View.VISIBLE);
-        boutonCash.setVisibility(View.VISIBLE);
+
+        affScore.setText(score + "");
 
         choixSolution(); // Choix entre Duo, Carré, Cash et apparition du fragment correspondant
         fragmentvide(); // Affichage du fragment présentation du jeu par défault
@@ -111,9 +111,16 @@ public class Quiz extends AppCompatActivity{
         if (compteur > maxquestions) {       // le quiz s'arrête au bout de n questions (n = maxquestions)
             loadScore();
             Toast.makeText(getApplicationContext(), "Fin du quiz", Toast.LENGTH_SHORT).show();
+            boutonDuo.setVisibility(View.GONE);
+            boutonCarre.setVisibility(View.GONE);
+            boutonCash.setVisibility(View.GONE);
             popupFinQuiz();
 
         } else {        //Si le nombre de questions max n'est pas atteint:
+
+            boutonDuo.setVisibility(View.VISIBLE);
+            boutonCarre.setVisibility(View.VISIBLE);
+            boutonCash.setVisibility(View.VISIBLE);
 
             numQuestion.setText(compteur + "/" + maxquestions); // Affichage du nombre de tours joué
 

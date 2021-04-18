@@ -30,7 +30,7 @@ public class CarreFragment extends Fragment {
 
     int place;
     int idplace;
-    int scoreCarre =75;
+    int scoreCarre =1250;
     View view;
 
     DatabaseReference databaseReference;

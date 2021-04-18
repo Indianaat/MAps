@@ -1,5 +1,6 @@
 package com.example.geo.Fragment;
 
+
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -29,8 +30,7 @@ public class DuoFragment extends Fragment {
     private static final String TAG = "Log: ";
 
     boolean place;
-    int scoreDuo = 25;
-
+    int scoreDuo = 250;
     View view;
     Button indice1;
     Button indice2;

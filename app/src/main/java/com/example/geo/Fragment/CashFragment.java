@@ -34,7 +34,7 @@ public class CashFragment extends Fragment {
     Button boutValReponse;
 
     String reponse;
-    int scoreCash = 150;
+    int scoreCash = 2500;
 
     DatabaseReference databaseReference;
 
