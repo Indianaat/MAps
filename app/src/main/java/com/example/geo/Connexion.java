@@ -14,16 +14,25 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.geo.activity.Inscription;
+import com.example.geo.activity.Score;
 import com.example.geo.model.InfoUtilisateur;
+import com.example.geo.model.ScoreDB;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.ArrayList;
+import java.util.Collections;
 
 public class Connexion extends AppCompatActivity {
 
@@ -31,6 +40,7 @@ public class Connexion extends AppCompatActivity {
     ProgressBar progressBar;
     FirebaseAuth fAuth;
     InfoUtilisateur infoUtilisateur;
+    String mlogin;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,7 +68,7 @@ public class Connexion extends AppCompatActivity {
     // Bouton valider --> Vérifier les identifiants. Si ils sont corrects renvoie sur l'activité Accueil
     public void actValider(View v){
 
-        String mlogin = login.getText().toString().trim();
+        mlogin = login.getText().toString().trim();
         String pwd = password.getText().toString().trim();
 
         // test champs vide
@@ -90,6 +100,7 @@ public class Connexion extends AppCompatActivity {
                     //lancement de l'activity Accueil
                     infoUtilisateur.setMdpUser(pwd);
                     infoUtilisateur.setEmailUser(mlogin);
+                    chargerPseudo();
                     Log.v("test",infoUtilisateur.getEmailUser());
                     startActivity(i);
                 }else {
@@ -99,5 +110,30 @@ public class Connexion extends AppCompatActivity {
             }
         });
 
+    }
+    public void chargerPseudo(){
+        FirebaseFirestore fStore;
+        fStore = FirebaseFirestore.getInstance();
+        fStore.collection("users")
+                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        Log.d("TAGEMAIL", document.getId() + " => " + document.getData().get("score"));
+                        String mailCheck = String.valueOf(document.getData().get("email")).trim();
+                        Log.v("value Email",String.valueOf(document.getData().get("email")).trim());
+                        Log.v("value Email check",mlogin);
+                        if(  mailCheck.trim().equals(mlogin.trim()) ){
+                           infoUtilisateur.setPseudoUser(String.valueOf(document.getData().get("fPseudo")));
+                           Log.v("PseudoUtilisateur",infoUtilisateur.getPseudoUser());
+                        }
+
+                    }
+                } else {
+                    Log.w("TAG", "Error getting documents.", task.getException());
+                }
+            }
+        });
     }
 }
