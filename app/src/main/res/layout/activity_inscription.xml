@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/fond_degrade"
     tools:context=".activity.Inscription">
 
     <TextView
@@ -80,6 +81,10 @@
 
 
     <Button
+        android:background="@drawable/bouton"
+        android:backgroundTint="@color/white"
+        android:textColor="@color/vert_principal"
+        app:backgroundTint="@color/white"
         android:id="@+id/registerBtn"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

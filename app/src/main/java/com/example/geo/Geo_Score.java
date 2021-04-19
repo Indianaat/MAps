@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.geo.model.InfoUtilisateur;
@@ -31,6 +32,7 @@ public class Geo_Score extends AppCompatActivity {
     Double TotalScore = 0.0;
     private FirebaseFirestore db =FirebaseFirestore.getInstance() ;
     private DocumentReference noteRef ;
+    TextView totalV;
 
     public String getIDUser() {
         return IDUser;
@@ -49,7 +51,7 @@ public class Geo_Score extends AppCompatActivity {
         lstViewScore = findViewById(R.id.listScore);
         Intent intent = getIntent();
         infoUtilisateur = (InfoUtilisateur) getApplicationContext();
-
+        totalV = findViewById(R.id.ViewTotal);
         String userDB = String.format("users/"+infoUtilisateur.getEmailUser());
         noteRef = db.document(userDB);
         if (intent != null){
@@ -63,7 +65,7 @@ public class Geo_Score extends AppCompatActivity {
             Log.d("Intent", "Intent is null :(");
         }
         for (int i=0; i<listScore.size();i++){
-            String objectDisplay = String.format("Manche %d\n %.2f Points   \n%.2f Kilometres",i,listScore.get(i),listDistance.get(i)/1000);
+            String objectDisplay = String.format("Manche %d\n %.2f Points   \n%.2f Kilometres",i+1,listScore.get(i),listDistance.get(i)/1000);
             listDisplay.add(objectDisplay);
         }
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1,listDisplay);
@@ -77,17 +79,20 @@ public class Geo_Score extends AppCompatActivity {
     public void SaveScore(){
         String date= DateFormat.getInstance().format(System.currentTimeMillis());
         sommeScore();
-        Map<String,Object> scoreObject = new HashMap<>();
-        scoreObject.put("scoreGeo",Math.round(TotalScore));
-        scoreObject.put("dateScore",date);
-        scoreObject.put("email",infoUtilisateur.getEmailUser());
-        scoreObject.put("mdp",infoUtilisateur.getMdpUser());
-        scoreObject.put("fPseudo",infoUtilisateur.getPseudoUser());
-        scoreObject.put("scoreQuiz",infoUtilisateur.getScoreQuizz());
+        if(!infoUtilisateur.getPseudoUser().equals(null)){
+            Map<String,Object> scoreObject = new HashMap<>();
+            scoreObject.put("scoreGeo",Math.round(TotalScore));
+            scoreObject.put("dateScore",date);
+            scoreObject.put("email",infoUtilisateur.getEmailUser());
+            scoreObject.put("mdp",infoUtilisateur.getMdpUser());
+            scoreObject.put("fPseudo",infoUtilisateur.getPseudoUser());
+            scoreObject.put("scoreQuiz",infoUtilisateur.getScoreQuizz());
             noteRef.set(scoreObject).addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
                 public void onSuccess(Void aVoid) {
                     Toast.makeText(Geo_Score.this," Score sauvegardé",Toast.LENGTH_SHORT);
+                    Log.v("OMG",String.valueOf(TotalScore) );
+                    //totalV.setText("Points : " +  String.valueOf(TotalScore));
                 }
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
@@ -95,6 +100,8 @@ public class Geo_Score extends AppCompatActivity {
                     Toast.makeText(Geo_Score.this," Echec ajout dans la bdd",Toast.LENGTH_SHORT);
                 }
             });
+        }
+
     }
     public void sommeScore(){
         for (int i=0; i< listScore.size();i++)
