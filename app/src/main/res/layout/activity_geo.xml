@@ -33,14 +33,14 @@
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:text="Objectif : Se situer le plus proche de la ville"
         android:textAlignment="center"
-        android:text="Objectif : Ce situer le plus proche de la ville"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/map"
-        app:layout_constraintVertical_bias="0.279"
-        android:gravity="center_horizontal" />
+        app:layout_constraintVertical_bias="0.279" />
 
     <TextView
         android:id="@+id/textView4"
@@ -60,6 +60,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Suivant"
+        android:onClick="actNext"
         android:background="@drawable/bouton"
         android:backgroundTint="@color/white"
         android:textColor="@color/vert_principal"

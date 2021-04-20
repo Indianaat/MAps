@@ -60,9 +60,11 @@ public class Connexion extends AppCompatActivity {
     }
     // text pour créer un compte
     public void actCreeCompte(View v){
+        Log.v("test","OMG");
         Intent i= new Intent(Connexion.this, Inscription.class);
         i.putExtra("msg","Veuillez créer un compte");
         startActivity(i);
+        finish();
     }
 
     // Bouton valider --> Vérifier les identifiants. Si ils sont corrects renvoie sur l'activité Accueil
@@ -126,7 +128,13 @@ public class Connexion extends AppCompatActivity {
                         Log.v("value Email check",mlogin);
                         if(  mailCheck.trim().equals(mlogin.trim()) ){
                            infoUtilisateur.setPseudoUser(String.valueOf(document.getData().get("fPseudo")));
+                           Long scoreQuizz = Long.valueOf((Long) document.getData().get("scoreQuiz"));
+                           infoUtilisateur.setScoreQuizz(scoreQuizz.intValue());
+                           Long scoreGeo = Long.valueOf((Long)document.getData().get("scoreGeo"));
+                            infoUtilisateur.setScoreGeo(scoreGeo.intValue());
                            Log.v("PseudoUtilisateur",infoUtilisateur.getPseudoUser());
+                            Log.v("Score Quizz",infoUtilisateur.getScoreQuizz().toString());
+                            Log.v("Score Geo",infoUtilisateur.getScoreGeo().toString());
                         }
 
                     }

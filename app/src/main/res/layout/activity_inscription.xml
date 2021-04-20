@@ -81,6 +81,10 @@
 
 
     <Button
+        android:background="@drawable/bouton"
+        android:backgroundTint="@color/white"
+        android:textColor="@color/vert_principal"
+        app:backgroundTint="@color/white"
         android:id="@+id/registerBtn"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -88,9 +92,6 @@
         android:layout_marginTop="32dp"
         android:layout_marginEnd="16dp"
         android:text="Register"
-        android:background="@drawable/bouton"
-        android:backgroundTint="@color/white"
-        android:textColor="@color/vert_principal"
         android:textSize="13sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

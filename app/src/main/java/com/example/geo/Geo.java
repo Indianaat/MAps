@@ -9,6 +9,7 @@ package com.example.geo;
 import androidx.fragment.app.FragmentActivity;
 
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -197,6 +198,28 @@ public class Geo extends FragmentActivity implements OnMapReadyCallback {
                     AlertDialog.Builder scorePopup = new AlertDialog.Builder(geoActivity);
                     scorePopup.setTitle("Votre Score");
                     scorePopup.setMessage(String.format("%.2f",score) + " Points");
+
+                    // Bouton sur le popup suivant --> renvoi vers l'Accueil (choix mini jeux)
+                    scorePopup.setPositiveButton("Accueil", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Toast.makeText(getApplicationContext(), "Fin du jeu", Toast.LENGTH_SHORT).show();
+
+                            // On lance l'activité Accueil
+                            Intent i = new Intent(Geo.this, Accueil.class);
+                            startActivity(i);
+                        }
+                    });
+
+                    // Bouton sur le popup Rejouer --> relance le quiz
+                    scorePopup.setNegativeButton("Suivant", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Toast.makeText(getApplicationContext(), "Manche suivante", Toast.LENGTH_SHORT).show();
+                            //actNext();
+                        }
+                    });
+
                     scorePopup.show();
                 }else {
                     //PopUP
@@ -210,38 +233,36 @@ public class Geo extends FragmentActivity implements OnMapReadyCallback {
 
         });
 
-        btnNext.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (numQuestion < 5){
-                    if (markerPointChoisi != null) {
-                        markerPointChoisi.remove();
-                    }
-                    if (distancePoly != null) {
-                        distancePoly.remove();
-                    }
-                    if (markerVilleATrouver != null){
-                        markerVilleATrouver.remove();
-                    }
-                    cooPointChoisi =null;
-                    // Choix random de la ville
-                    Random rand = new Random();
-                    CityChosen = rand.nextInt(Mapcity.size());
-                    cityChosenView.setText(arrayVille.get(CityChosen));
-                    cooVilleATrouver = Mapcity.get(arrayVille.get(CityChosen));
-                    numQuestion = numQuestion+1;
-                    txtNumQuest.setText(numQuestion.toString() + "/ 5");
-                }else {
-                    btnNext.setText("Voir score");
-                    Intent i= new Intent(Geo.this,Geo_Score.class);
-                    Bundle b = new Bundle();
-                    b.putSerializable("arrayScore",listeScore);
-                    b.putSerializable("arrayDistance",listeDistance);
-                    i.putExtras(b);
-                    startActivity(i);
-                }
-            }
-        });
 
+    }
+    public void actNext(View v){
+        Log.v("VIEW",v.toString());
+        if (numQuestion < 5){
+            if (markerPointChoisi != null) {
+                markerPointChoisi.remove();
+            }
+            if (distancePoly != null) {
+                distancePoly.remove();
+            }
+            if (markerVilleATrouver != null){
+                markerVilleATrouver.remove();
+            }
+            cooPointChoisi =null;
+            // Choix random de la ville
+            Random rand = new Random();
+            CityChosen = rand.nextInt(Mapcity.size());
+            cityChosenView.setText(arrayVille.get(CityChosen));
+            cooVilleATrouver = Mapcity.get(arrayVille.get(CityChosen));
+            numQuestion = numQuestion+1;
+            txtNumQuest.setText(numQuestion.toString() + "/ 5");
+        }else {
+            btnNext.setText("Voir score");
+            Intent i= new Intent(Geo.this,Geo_Score.class);
+            Bundle b = new Bundle();
+            b.putSerializable("arrayScore",listeScore);
+            b.putSerializable("arrayDistance",listeDistance);
+            i.putExtras(b);
+            startActivity(i);
+        }
     }
 }

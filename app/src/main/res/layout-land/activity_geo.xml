@@ -81,6 +81,7 @@
             android:layout_height="match_parent"
             android:layout_gravity="center"
             android:layout_margin="15dp"
+            android:onClick="actNext"
             android:background="@drawable/bouton"
             android:backgroundTint="@color/white"
             android:text="@string/suivant"
