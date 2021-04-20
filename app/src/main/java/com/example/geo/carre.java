@@ -32,5 +32,4 @@ public class carre extends Fragment {
         });
         return view;
     }
-
 }

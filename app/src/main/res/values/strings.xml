@@ -13,5 +13,12 @@
     <string name="google_maps_key">AIzaSyDA7L_lmIAtkTJjeFk02xIoIOYBuNQcGM8</string>
     <string name="txtCash">Entrez votre solution</string>
     <string name="pres_quiz">Vous connaissez la réponse ? \n\nQue choisissez-vous ?\n Duo, Carré ou Cash?</string>
+    <string name="ville">Ville :</string>
+    <string name="objectif_ce_situer_le_plus_proche_de_la_ville">Objectif : Ce situer le plus proche de la ville</string>
+    <string name="appuyez_longtemps_pour_mettre_votre_marker">Appuyez LONGTEMPS pour mettre votre marker</string>
+    <string name="suivant">Suivant</string>
+    <string name="score_geo">Vos scores sur le jeu Geo</string>
+    <string name="accueil">Accueil</string>
+    <string name="inscription">Inscription</string>
 
 </resources>
