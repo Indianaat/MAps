@@ -9,6 +9,7 @@ package com.example.geo;
 import androidx.fragment.app.FragmentActivity;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -57,6 +58,7 @@ public class Geo extends FragmentActivity implements OnMapReadyCallback {
     Marker markerPointChoisi, markerVilleATrouver;
     Polyline distancePoly;
     LatLng cooPointChoisi, cooVilleATrouver;
+    Dialog dialog;
     private Geo geoActivity;
     ArrayList <Double> listeScore = new ArrayList<>();
     ArrayList <Double> listeDistance = new ArrayList<>();
@@ -67,6 +69,8 @@ public class Geo extends FragmentActivity implements OnMapReadyCallback {
         cityChosenView = findViewById(R.id.cityChosen);
         txtNumQuest = findViewById(R.id.txtNumQuest);
         btnNext = (Button) findViewById(R.id.btnNext);
+
+        dialog = new Dialog(this);
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map); // Fragment de la map google
         this.geoActivity = this;
@@ -105,7 +109,6 @@ public class Geo extends FragmentActivity implements OnMapReadyCallback {
 
     }
 
-
     //Bordures de cadre de la france pour la map
 
     LatLngBounds franceBounds = new LatLngBounds(
@@ -135,7 +138,6 @@ public class Geo extends FragmentActivity implements OnMapReadyCallback {
         if (markerVilleATrouver != null){
             markerVilleATrouver.remove();
         }
-
 
         try {
             // On customise notre MAP avec le JSON mapstyle
@@ -195,33 +197,16 @@ public class Geo extends FragmentActivity implements OnMapReadyCallback {
 
 
                     //PopUP
-                    AlertDialog.Builder scorePopup = new AlertDialog.Builder(geoActivity);
-                    scorePopup.setTitle("Votre Score");
-                    scorePopup.setMessage(String.format("%.2f",score) + " Points");
+                    //popup de fin de partie
+                    TextView txt_popup_aff_score;
 
-                    // Bouton sur le popup suivant --> renvoi vers l'Accueil (choix mini jeux)
-                    scorePopup.setPositiveButton("Accueil", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            Toast.makeText(getApplicationContext(), "Fin du jeu", Toast.LENGTH_SHORT).show();
+                    dialog.setContentView(R.layout.popup_geo);
+                    txt_popup_aff_score = (TextView) dialog.findViewById(R.id.txt_popup_aff_score);
+                    txt_popup_aff_score.setText(String.format("%.2f",score) + " Points");
 
-                            // On lance l'activité Accueil
-                            Intent i = new Intent(Geo.this, Accueil.class);
-                            startActivity(i);
-                        }
-                    });
+                    dialog.show();
 
-                    // Bouton sur le popup Rejouer --> relance le quiz
-                    scorePopup.setNegativeButton("Suivant", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            Toast.makeText(getApplicationContext(), "Manche suivante", Toast.LENGTH_SHORT).show();
-                            //actNext();
-                        }
-                    });
-
-                    scorePopup.show();
-                }else {
+                } else {
                     //PopUP
                     AlertDialog.Builder scorePopup = new AlertDialog.Builder(geoActivity);
                     scorePopup.setTitle("Partie déja joué");

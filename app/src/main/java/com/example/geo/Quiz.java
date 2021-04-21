@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -50,8 +51,8 @@ public class Quiz extends AppCompatActivity{
     private static final String TAG = "Log: ";
 
     ImageView imageQuiz;
-    TextView questions, numQuestion, affScore;
-    Button boutonDuo, boutonCarre, boutonCash;
+    TextView questions, numQuestion, affScore, txt_popup_aff_score;
+    Button boutonDuo, boutonCarre, boutonCash, but_popup_rejouer, but_popup_accueil;
 
     int compteur = 0;
     public int score = 0;
@@ -61,8 +62,9 @@ public class Quiz extends AppCompatActivity{
 
     InfoUtilisateur infoUtilisateur;
     private DocumentReference noteRef ;
-    private FirebaseFirestore db =FirebaseFirestore.getInstance() ;
+    private FirebaseFirestore db =FirebaseFirestore.getInstance();
 
+    Dialog dialog;
     DatabaseReference databaseReference;
     FirebaseFirestore firestore;
 
@@ -78,10 +80,9 @@ public class Quiz extends AppCompatActivity{
         boutonCarre = findViewById(R.id.Carre);
         boutonCash = findViewById(R.id.Cash);
         affScore = findViewById(R.id.affScore);
-
+        dialog = new Dialog(this);
         firestore = FirebaseFirestore.getInstance();
         score = 0;
-
 
     }
 
@@ -114,7 +115,15 @@ public class Quiz extends AppCompatActivity{
             boutonDuo.setVisibility(View.GONE);
             boutonCarre.setVisibility(View.GONE);
             boutonCash.setVisibility(View.GONE);
-            popupFinQuiz();
+
+            //popup de fin de partie
+            dialog.setContentView(R.layout.popup);
+            txt_popup_aff_score = (TextView) dialog.findViewById(R.id.txt_popup_aff_score);
+
+            txt_popup_aff_score.setText(score+"");
+            popupButton();
+
+            dialog.show();
 
         } else {        //Si le nombre de questions max n'est pas atteint:
 
@@ -145,37 +154,26 @@ public class Quiz extends AppCompatActivity{
     }
 
     // Popup de fin qui affiche le score du joueur
-    public void popupFinQuiz(){
+    public void popupButton(){
+        but_popup_rejouer = (Button) dialog.findViewById(R.id.but_popup_rejouer);
+        but_popup_accueil = (Button) dialog.findViewById(R.id.but_popup_accueil);
 
-        AlertDialog.Builder scorePopup = new AlertDialog.Builder(this);
-
-        scorePopup.setTitle("Votre Score:");
-        scorePopup.setMessage(score + " points");
-
-        // Bouton sur le popup suivant --> renvoi vers l'Accueil (choix mini jeux)
-        scorePopup.setPositiveButton("Suivant", new DialogInterface.OnClickListener() {
+        but_popup_rejouer.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialog, int which) {
-                Toast.makeText(getApplicationContext(), "Fin du jeu", Toast.LENGTH_SHORT).show();
-
-                // On lance l'activité Score
-                Intent i = new Intent(Quiz.this, Accueil.class);
-                startActivity(i);
-            }
-        });
-
-        // Bouton sur le popup Rejouer --> relance le quiz
-        scorePopup.setNegativeButton("Rejouer", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                Toast.makeText(getApplicationContext(), "Une nouvelle partie commence", Toast.LENGTH_SHORT).show();
-
+            public void onClick(View v) {
                 // On lance l'activité Score
                 Intent i = new Intent(Quiz.this, Quiz.class);
                 startActivity(i);
             }
         });
-        scorePopup.show();
+        but_popup_accueil.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // On lance l'activité Score
+                Intent i = new Intent(Quiz.this, Accueil.class);
+                startActivity(i);
+            }
+        });
     }
 
     // Méthode pour générer un nombre aléatoire
