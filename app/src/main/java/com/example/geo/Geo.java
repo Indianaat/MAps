@@ -53,7 +53,7 @@ public class Geo extends FragmentActivity implements OnMapReadyCallback {
     Integer CityChosen;
     TextView cityChosenView, txtNumQuest;
     Double distance, score;
-    Button btnNext;
+    Button btnNext, but_popup_marker, but_popup_next;
     Integer numQuestion =1;
     Marker markerPointChoisi, markerVilleATrouver;
     Polyline distancePoly;
@@ -203,15 +203,29 @@ public class Geo extends FragmentActivity implements OnMapReadyCallback {
                     dialog.setContentView(R.layout.popup_geo);
                     txt_popup_aff_score = (TextView) dialog.findViewById(R.id.txt_popup_aff_score);
                     txt_popup_aff_score.setText(String.format("%.2f",score) + " Points");
+                    but_popup_marker = (Button) dialog.findViewById(R.id.but_popup_marker);
+                    but_popup_next = (Button) dialog.findViewById(R.id.but_popup_next);
 
                     dialog.show();
 
+                    but_popup_marker.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            dialog.dismiss();
+                        }
+                    });
+                    but_popup_next.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            actNext(v);
+                            dialog.dismiss();
+                        }
+                    });
+
                 } else {
                     //PopUP
-                    AlertDialog.Builder scorePopup = new AlertDialog.Builder(geoActivity);
-                    scorePopup.setTitle("Partie déja joué");
-                    scorePopup.setMessage("Veuillez cliquer sur suivant vous avez déja posé votre point");
-                    scorePopup.show();
+                    dialog.setContentView(R.layout.popup_geo_fin);
+                    dialog.show();
                 }
 
             }
