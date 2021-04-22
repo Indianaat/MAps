@@ -79,7 +79,6 @@ public class Geo_Score extends AppCompatActivity {
     public void SaveScore(){
         String date= DateFormat.getInstance().format(System.currentTimeMillis());
         sommeScore();
-        if(!infoUtilisateur.getPseudoUser().equals(null)){
             Map<String,Object> scoreObject = new HashMap<>();
             scoreObject.put("scoreGeo",Math.round(TotalScore));
             scoreObject.put("dateScore",date);
@@ -102,7 +101,6 @@ public class Geo_Score extends AppCompatActivity {
             });
         }
 
-    }
     public void sommeScore(){
         for (int i=0; i< listScore.size();i++)
         {
