@@ -112,12 +112,8 @@ public class GeoScore extends AppCompatActivity {
             });
         }
 
-<<<<<<< HEAD:app/src/main/java/com/example/geo/Geo_Score.java
-    public void sommeScore(){
-=======
 
     public void sumScore(){
->>>>>>> 9b5327a89d68c56fcfc5c5b39f21c1972c948039:app/src/main/java/com/example/geo/activity/GeoScore.java
         for (int i=0; i< listScore.size();i++)
         {
             TotalScore = TotalScore+ listScore.get(i);

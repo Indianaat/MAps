@@ -19,6 +19,9 @@ public class ScoreDB implements Comparable <ScoreDB>{
         return   compare.intValue();
     }
     public String toString(){
+        if(pseudo.equals("null")){
+            pseudo = "invité";
+        }
         return String.format(" Pseudo : %s\n Score total : %d\n Score Geo : %d\n Score Quiz : %d",pseudo,sommeScore,scoreGeo,scoreQuiz);
     }
 }

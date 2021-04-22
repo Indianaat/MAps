@@ -20,7 +20,7 @@
     "Longitude": -1.5541362
   },
   {
-    "Ville": "Saint-etienne",
+    "Ville": "Saint-Etienne",
     "Latitude": 45.4401467,
     "Longitude": 4.3873058
   },
@@ -93,5 +93,105 @@
     "Ville": "Montpellier",
     "Latitude": 43.6112422,
     "Longitude": 3.8767337
+  },
+  {
+    "Ville": "Caen",
+    "Latitude": 49.183333,
+    "Longitude": -0.350000
+  },
+  {
+    "Ville": "Dijon",
+    "Latitude": 47.321581,
+    "Longitude": 5.04147
+  },
+  {
+    "Ville": "Epinal",
+    "Latitude": 48.174768,
+    "Longitude": 6.450364
+  },
+  {
+    "Ville": "Nimes",
+    "Latitude": 43.8374249,
+    "Longitude": 4.3600687
+  },
+  {
+    "Ville": "Carcassonne",
+    "Latitude": 43.2130358,
+    "Longitude": 2.3491069
+  },
+  {
+    "Ville": "Perpignan",
+    "Latitude": 42.6985304,
+    "Longitude": 2.8953121
+  },
+  {
+    "Ville": "Pau",
+    "Latitude": 43.295755,
+    "Longitude": -0.3685668
+  },
+  {
+    "Ville": "Poitiers",
+    "Latitude": 46.58026,
+    "Longitude": 0.340196
+  },
+  {
+    "Ville": "Orléans",
+    "Latitude": 47.9027336,
+    "Longitude": 1.9086066
+  },
+  {
+    "Ville": "Le Mans",
+    "Latitude": 48.0073796,
+    "Longitude": 0.1967599
+  },
+  {
+    "Ville": "Limoges",
+    "Latitude": 45.8354243,
+    "Longitude": 1.2644847
+  },
+  {
+    "Ville": "Rouen",
+    "Latitude": 49.4404591,
+    "Longitude": 1.0939658
+  },
+  {
+    "Ville": "Clermont-Ferrand",
+    "Latitude": 45.777455,
+    "Longitude": 3.081943
+  },
+  {
+    "Ville": "Valence",
+    "Latitude": 44.933751,
+    "Longitude": 4.89005
+  },
+  {
+    "Ville": "Rodez",
+    "Latitude": 44.351306,
+    "Longitude": 2.572788
+  },
+  {
+    "Ville": "Avignon",
+    "Latitude": 43.9492493,
+    "Longitude": 4.8059012
+  },
+  {
+    "Ville": "Toulon",
+    "Latitude": 43.1257311,
+    "Longitude": 5.9304919
+  },
+  {
+    "Ville": "Ajaccio",
+    "Latitude": 41.91934295375923,
+    "Longitude": 8.73532906015987
+  },
+  {
+    "Ville": "Bastia",
+    "Latitude": 42.7065505,
+    "Longitude": 9.452542
+  },
+  {
+    "Ville": "Versailles",
+    "Latitude": 48.8035403,
+    "Longitude": 2.1266886
   }
 ]

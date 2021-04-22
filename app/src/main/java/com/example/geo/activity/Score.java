@@ -45,14 +45,18 @@ public class Score extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {
+                    Integer i=0;
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         Log.d("TAG2", document.getId() + " => " + document.getData().get("fPseudo"));
-                        if(document.getData().get("scoreGeo") != null || document.getData().get("scoreQuiz") != null){
-
-                            Long scoreGeo =  document.getData().get("scoreGeo") != null ? (Long) document.getData().get("scoreGeo") : 0;
-                            Long scoreQuiz = document.getData().get("scoreQuiz") != null ? (Long) document.getData().get("scoreQuiz") : 0;
-                            Long sommeScore = scoreQuiz + scoreGeo;
-                            objtScoreDB.add(new ScoreDB(  "" + document.getData().get("fPseudo"),scoreGeo, scoreQuiz,sommeScore));
+                        if (i<10){
+                            if(document.getData().get("scoreGeo") != null || document.getData().get("scoreQuiz") != null && i<10){
+                                Long scoreGeo =  document.getData().get("scoreGeo") != null ? (Long) document.getData().get("scoreGeo") : 0;
+                                Long scoreQuiz = document.getData().get("scoreQuiz") != null ? (Long) document.getData().get("scoreQuiz") : 0;
+                                Long sommeScore = scoreQuiz + scoreGeo;
+                                objtScoreDB.add(new ScoreDB(  "" + document.getData().get("fPseudo"),scoreGeo, scoreQuiz,sommeScore));
+                                i=i+1;
+                                Log.v("TAG3",i.toString());
+                            }
                         }
 
                     }
