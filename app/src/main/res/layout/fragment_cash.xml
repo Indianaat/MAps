@@ -12,7 +12,7 @@
 
 
     <EditText
-        android:id="@+id/txtReponse"
+        android:id="@+id/txt_reponse"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:hint="@string/txtCash"
@@ -20,13 +20,13 @@
         android:padding="10dp"/>
 
     <Button
-        android:id="@+id/boutValReponse"
+        android:id="@+id/but_check"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:padding="10dp"
         android:text="@string/but_valider"
-        android:background="@drawable/bouton"
+        android:background="@drawable/gradient_background"
         android:textColor="@color/vert_principal"
         app:backgroundTint="@color/white"/>
     </LinearLayout>

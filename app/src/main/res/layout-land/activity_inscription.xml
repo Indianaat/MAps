@@ -8,7 +8,7 @@
     tools:context=".activity.Inscription">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/txt_title_sign"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/inscription"
@@ -21,95 +21,95 @@
         app:layout_constraintVertical_bias="0.042" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/txt_subtitle_sign"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="Création d'un nouveau compte"
+        android:text="@string/subtitle_signup"
         android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/txt_title_sign" />
 
     <EditText
-        android:id="@+id/pseudo"
+        android:id="@+id/txt_pseudo"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:ems="10"
-        android:hint="Pseudo"
+        android:hint="@string/password_sign"
         android:inputType="textPersonName"
         android:padding="10dp"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        app:layout_constraintTop_toBottomOf="@+id/txt_subtitle_sign" />
 
     <EditText
-        android:id="@+id/Email"
+        android:id="@+id/txt_email"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
         android:ems="10"
-        android:hint="Email"
+        android:hint="@string/email"
         android:inputType="textEmailAddress"
         android:padding="10dp"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pseudo" />
+        app:layout_constraintTop_toBottomOf="@+id/txt_pseudo" />
 
     <EditText
-        android:id="@+id/password"
+        android:id="@+id/txt_password"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
         android:ems="10"
-        android:hint="Password"
+        android:hint="@string/password_sign"
         android:inputType="textPassword"
         android:padding="10dp"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Email" />
+        app:layout_constraintTop_toBottomOf="@+id/txt_email" />
 
 
     <Button
-        android:id="@+id/registerBtn"
+        android:id="@+id/but_signup"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:background="@drawable/bouton"
-        android:text="S'inscrire"
+        android:background="@drawable/gradient_background"
+        android:text="@string/sign"
         android:textColor="@color/vert_principal"
         android:textSize="13sp"
         app:backgroundTint="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/password" />
+        app:layout_constraintTop_toBottomOf="@+id/txt_password" />
 
     <TextView
-        android:id="@+id/createText"
+        android:id="@+id/txt_connexion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="Déja enregistré ? connectez vous"
+        android:text="@string/co_ok"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.499"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/registerBtn"
+        app:layout_constraintTop_toBottomOf="@+id/but_signup"
         app:layout_constraintVertical_bias="0.116" />
 
     <ProgressBar
-        android:id="@+id/progressBar"
+        android:id="@+id/progress_bar"
         style="?android:attr/progressBarStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -119,8 +119,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.463"
-        app:layout_constraintStart_toEndOf="@+id/createText"
-        app:layout_constraintTop_toBottomOf="@+id/registerBtn"
+        app:layout_constraintStart_toEndOf="@+id/txt_connexion"
+        app:layout_constraintTop_toBottomOf="@+id/but_signup"
         app:layout_constraintVertical_bias="0.017" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

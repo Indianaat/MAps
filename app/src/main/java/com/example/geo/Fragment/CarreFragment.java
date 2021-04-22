@@ -13,15 +13,14 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.example.geo.Question;
-import com.example.geo.Quiz;
+import com.example.geo.activity.Question;
+import com.example.geo.activity.Quiz;
 import com.example.geo.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.Random;
 
@@ -31,6 +30,7 @@ public class CarreFragment extends Fragment {
     int place;
     int idplace;
     int scoreCarre =1250;
+
     View view;
 
     DatabaseReference databaseReference;
@@ -45,20 +45,20 @@ public class CarreFragment extends Fragment {
 
         view = inflater.inflate(R.layout.fragment_carre, container, false);
 
-        indiceCarre();
+        tipsCarre();
 
         // Inflate the layout for this fragment
         return view;
     }
 
-    public void indiceCarre(){
+    public void tipsCarre(){
 
         Quiz quizActivity = (Quiz) getActivity();
 
-        Button indice1 = view.findViewById(R.id.boutonInd1);
-        Button indice2 = view.findViewById(R.id.boutonInd2);
-        Button indice3 = view.findViewById(R.id.boutonInd3);
-        Button indice4 = view.findViewById(R.id.boutonInd4);
+        Button but_tips1 = view.findViewById(R.id.but_tips1);
+        Button but_tips2 = view.findViewById(R.id.but_tips2);
+        Button but_tips3 = view.findViewById(R.id.but_tips3);
+        Button but_tips4 = view.findViewById(R.id.but_tips4);
 
         int idQuestion = quizActivity.getIdQuestion(); //Récupère l'ID dans l'activité Quiz
 
@@ -69,38 +69,38 @@ public class CarreFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 final Question question = dataSnapshot.getValue(Question.class);
 
-                idplace = genereRandom(); // ID aléatoir pour placer la réponse parmis les indices
+                idplace = generateRandom(); // ID aléatoir pour placer la réponse parmis les indices
 
                 // Récupération des options de réponses --> écrit l'option dans le texte du bouton
                 // Placement de la réponses dans les boutons
                 if (idplace == 1){
-                    indice1.setText(question.getAnswer());
-                    indice2.setText(question.getOption1());
-                    indice3.setText(question.getOption2());
-                    indice4.setText(question.getOption3());
+                    but_tips1.setText(question.getAnswer());
+                    but_tips2.setText(question.getOption1());
+                    but_tips3.setText(question.getOption2());
+                    but_tips4.setText(question.getOption3());
                 } else if (idplace == 2 ){
-                    indice1.setText(question.getOption1());
-                    indice2.setText(question.getAnswer());
-                    indice3.setText(question.getOption2());
-                    indice4.setText(question.getOption3());
+                    but_tips1.setText(question.getOption1());
+                    but_tips2.setText(question.getAnswer());
+                    but_tips3.setText(question.getOption2());
+                    but_tips4.setText(question.getOption3());
                 } else if (idplace == 3){
-                    indice1.setText(question.getOption1());
-                    indice2.setText(question.getOption2());
-                    indice3.setText(question.getAnswer());
-                    indice4.setText(question.getOption3());
+                    but_tips1.setText(question.getOption1());
+                    but_tips2.setText(question.getOption2());
+                    but_tips3.setText(question.getAnswer());
+                    but_tips4.setText(question.getOption3());
                 } else {
-                    indice1.setText(question.getOption1());
-                    indice2.setText(question.getOption2());
-                    indice3.setText(question.getOption3());
-                    indice4.setText(question.getAnswer());
+                    but_tips1.setText(question.getOption1());
+                    but_tips2.setText(question.getOption2());
+                    but_tips3.setText(question.getOption3());
+                    but_tips4.setText(question.getAnswer());
                 }
 
                 // L'utilisateur clique sur le 1er bouton
-                indice1.setOnClickListener(new View.OnClickListener() {
+                but_tips1.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        if ( indice1.getText().toString().equals(question.getAnswer())) {
-                            Log.v(TAG, indice1.getText().toString() + "");
+                        if ( but_tips1.getText().toString().equals(question.getAnswer())) {
+                            Log.v(TAG, but_tips1.getText().toString() + "");
                             Toast.makeText(quizActivity.getApplicationContext(), "Correct", Toast.LENGTH_SHORT).show();
                             quizActivity.score = quizActivity.score + scoreCarre;
                             Handler handler = new Handler();
@@ -123,10 +123,10 @@ public class CarreFragment extends Fragment {
                         }
                     }
                 });
-                indice2.setOnClickListener(new View.OnClickListener() {
+                but_tips2.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        if ( indice2.getText().toString().equals(question.answer)) {
+                        if ( but_tips2.getText().toString().equals(question.answer)) {
                             Toast.makeText(quizActivity.getApplicationContext(), "Correct", Toast.LENGTH_SHORT).show();
                             quizActivity.score = quizActivity.score + scoreCarre;
                             Handler handler = new Handler();
@@ -149,10 +149,10 @@ public class CarreFragment extends Fragment {
                         }
                     }
                 });
-                indice3.setOnClickListener(new View.OnClickListener() {
+                but_tips3.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        if ( indice3.getText().toString().equals(question.answer)) {
+                        if ( but_tips3.getText().toString().equals(question.answer)) {
                             Toast.makeText(quizActivity.getApplicationContext(), "Correct", Toast.LENGTH_SHORT).show();
                             quizActivity.score = quizActivity.score + scoreCarre;
                             Handler handler = new Handler();
@@ -175,10 +175,10 @@ public class CarreFragment extends Fragment {
                         }
                     }
                 });
-                indice4.setOnClickListener(new View.OnClickListener() {
+                but_tips4.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        if ( indice4.getText().toString().equals(question.answer)) {
+                        if ( but_tips4.getText().toString().equals(question.answer)) {
                             Toast.makeText(quizActivity.getApplicationContext(), "Correct", Toast.LENGTH_SHORT).show();
                             quizActivity.score = quizActivity.score + scoreCarre;
                             Handler handler = new Handler();
@@ -210,7 +210,7 @@ public class CarreFragment extends Fragment {
 
     }
     // Méthode pour générer un nombres aléatoire pour placer les indices
-    public int genereRandom() {
+    public int generateRandom() {
         Random random = new Random();
         place = 1 +random.nextInt(4 - 1);
         return place;

@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="200dp"
-    android:layout_height="250dp"
+    android:layout_height="350dp"
     android:layout_gravity="center"
-    android:background="@drawable/bouton"
+    android:background="@drawable/gradient_background"
     android:padding="5dp"
     app:backgroundTint="@color/white">
 
@@ -13,8 +14,7 @@
         android:id="@+id/img_popup_logo"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_marginTop="16dp"
-        android:src="@drawable/path24"
+        android:src="@drawable/logo_maps"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -23,13 +23,11 @@
         android:id="@+id/txt_popup_score"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         android:gravity="center"
         android:padding="10dp"
-        android:text="Score"
+        android:text="@string/score"
         android:textColor="@color/vert_principal"
         android:textSize="25dp"
-        app:layout_constraintBottom_toTopOf="@+id/txt_popup_aff_score"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/img_popup_logo" />
@@ -38,15 +36,40 @@
         android:id="@+id/txt_popup_aff_score"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
         android:gravity="center"
         android:padding="10dp"
-        android:text="Votre score"
+        android:text="@string/votre_score"
         android:textColor="@color/vert_principal"
         android:textSize="25dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_popup_score" />
+
+    <Button
+        android:id="@+id/but_popup_next"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:text="@string/suivant"
+        android:textColor="@color/white"
+        app:backgroundTint="@color/vert_principal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/img_popup_logo" />
+        app:layout_constraintTop_toBottomOf="@+id/but_popup_marker" />
+
+    <Button
+        android:id="@+id/but_popup_marker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:padding="10dp"
+        android:text="Voir marker"
+        android:textColor="@color/white"
+        app:backgroundTint="@color/vert_principal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_popup_aff_score" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

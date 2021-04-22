@@ -13,18 +13,16 @@
         android:supportsRtl="true"
         android:name=".model.InfoUtilisateur"
         android:theme="@style/Theme.Geo">
-        <activity android:name=".Geo_Score"></activity>
+        <activity android:name=".activity.GeoScore"></activity>
         <activity android:name=".activity.Inscription"></activity>
-
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
-
         <activity android:name=".activity.Score" />
-        <activity android:name=".Geo" />
-        <activity android:name=".Quiz" />
-        <activity android:name=".Accueil" />
-        <activity android:name=".Connexion">
+        <activity android:name=".activity.Geo" />
+        <activity android:name=".activity.Quiz" />
+        <activity android:name=".activity.Accueil" />
+        <activity android:name=".activity.Connexion">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

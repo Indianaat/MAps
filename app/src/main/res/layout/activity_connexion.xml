@@ -5,11 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/fond_degrade"
-    tools:context=".Connexion">
+    tools:context=".activity.Connexion">
 
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/img_co_logo"
         android:layout_width="190dp"
         android:layout_height="144dp"
         android:layout_marginTop="140dp"
@@ -17,10 +17,10 @@
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/path24" />
+        app:srcCompat="@drawable/logo_maps" />
 
     <EditText
-        android:id="@+id/login"
+        android:id="@+id/txt_login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
@@ -30,10 +30,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toBottomOf="@+id/img_co_logo" />
 
     <EditText
-        android:id="@+id/password"
+        android:id="@+id/txt_password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -43,17 +43,17 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/login"
+        app:layout_constraintTop_toBottomOf="@+id/txt_login"
         tools:ignore="MissingConstraints" />
 
 
     <Button
-        android:id="@+id/Valider"
+        android:id="@+id/but_validate"
         android:layout_width="240dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:background="@drawable/bouton"
-        android:onClick="actValider"
+        android:background="@drawable/gradient_background"
+        android:onClick="actValidate"
         android:text="@string/but_valider"
         android:textColor="@color/vert_principal"
         app:backgroundTint="@color/white"
@@ -61,11 +61,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/password"
+        app:layout_constraintTop_toBottomOf="@+id/txt_password"
         app:layout_constraintVertical_bias="0.345" />
 
     <ProgressBar
-        android:id="@+id/progressBar2"
+        android:id="@+id/progress_bar"
         android:visibility="invisible"
         style="?android:attr/progressBarStyle"
         android:layout_width="wrap_content"
@@ -74,26 +74,26 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Valider"
+        app:layout_constraintTop_toBottomOf="@+id/but_validate"
         app:layout_constraintVertical_bias="0.45" />
 
     <TextView
-        android:id="@+id/createText2"
+        android:id="@+id/txt_create_account"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Nouveau ? créer un compte"
-        android:onClick="actCreeCompte"
-        app:layout_constraintBottom_toTopOf="@+id/progressBar2"
+        android:onClick="actCreateAccount"
+        app:layout_constraintBottom_toTopOf="@+id/progress_bar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Valider" />
+        app:layout_constraintTop_toBottomOf="@+id/but_validate" />
 
     <TextView
-        android:id="@+id/txtNoscore"
+        android:id="@+id/txt_noscore"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Jouer sans enregistrer son score"
-        app:layout_constraintBottom_toTopOf="@+id/imageView"
+        android:text="@string/play_noscore"
+        app:layout_constraintBottom_toTopOf="@+id/img_co_logo"
         app:layout_constraintEnd_toEndOf="parent"
         android:onClick="actNoScore"
         app:layout_constraintHorizontal_bias="0.92"

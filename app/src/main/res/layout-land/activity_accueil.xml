@@ -6,14 +6,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".Accueil"
+    tools:context=".activity.Accueil"
     android:orientation="horizontal"
     android:background="@drawable/fond_degrade"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <ImageView
-        android:id="@+id/buttonQuiz"
+        android:id="@+id/but_quiz"
         android:layout_width="200dp"
         android:layout_height="200dp"
         android:layout_marginStart="16dp"
@@ -25,19 +25,19 @@
         app:srcCompat="@drawable/ny_statut_liberte" />
 
     <ImageView
-        android:id="@+id/buttonGeo"
+        android:id="@+id/but_geo"
         android:layout_width="200dp"
         android:layout_height="200dp"
         android:layout_marginStart="24dp"
         android:layout_marginLeft="24dp"
         android:onClick="actGeo"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/buttonQuiz"
+        app:layout_constraintStart_toEndOf="@+id/but_quiz"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/space" />
 
     <ImageView
-        android:id="@+id/buttonScore"
+        android:id="@+id/but_score"
         android:layout_width="200dp"
         android:layout_height="200dp"
         android:layout_marginStart="24dp"
@@ -47,7 +47,7 @@
         android:onClick="actScore"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/buttonGeo"
+        app:layout_constraintStart_toEndOf="@+id/but_geo"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/scores" />
 

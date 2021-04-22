@@ -2,7 +2,7 @@
  Classe Question
 **/
 
-package com.example.geo;
+package com.example.geo.activity;
 
 public class Question {
 
@@ -14,17 +14,8 @@ public class Question {
         this.option1 = option1;
         this.option2 = option2;
         this.option3 = option3;
-        this.option4 = option4;
         this.answer = answer;
         this.image = image;
-    }
-
-    public String getOption4() {
-        return option4;
-    }
-
-    public void setOption4(String option4) {
-        this.option4 = option4;
     }
 
     public Question(){}

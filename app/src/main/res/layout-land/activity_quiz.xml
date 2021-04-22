@@ -7,7 +7,7 @@
     android:id="@+id/quizLayout"
     android:orientation="horizontal"
     android:background="@drawable/fond_degrade"
-    tools:context=".Quiz">
+    tools:context=".activity.Quiz">
 
     <LinearLayout
         android:id="@+id/linearLayoutQuestion"
@@ -20,42 +20,41 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/numQuest"
+            android:id="@+id/txt_num_quest"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:padding="5dp"
-            android:text="1/10"
+            android:text=""
             android:textColor="@color/white"
             android:textSize="16dp" />
 
         <ImageView
-            android:id="@+id/ImageQuiz"
+            android:id="@+id/img_quiz"
             android:layout_width="wrap_content"
             android:layout_height="200dp"
-            android:layout_gravity="center"
-            app:srcCompat="@drawable/tour_effeil" />
+            android:layout_gravity="center" />
 
         <TextView
-            android:id="@+id/Question"
+            android:id="@+id/txt_quest"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:padding="10dp"
-            android:text="Question"
+            android:text="@string/question"
             android:textColor="@color/white"
             android:textSize="17dp" />
 
         <TextView
-            android:id="@+id/affScore"
+            android:id="@+id/txt_show_score"
             android:layout_width="60dp"
             android:layout_height="30dp"
             android:layout_gravity="center"
             android:layout_marginTop="2dp"
-            android:background="@drawable/bouton"
+            android:background="@drawable/gradient_background"
             android:backgroundTint="@color/white"
             android:gravity="center"
-            android:text="0"
+            android:text="-"
             android:textColor="@color/bleu_principal"
             android:textSize="15dp"
             android:textStyle="bold" />
@@ -72,36 +71,36 @@
         tools:ignore="MissingConstraints">
 
         <Button
-            android:id="@+id/Duo"
+            android:id="@+id/but_duo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:background="@drawable/bouton"
+            android:background="@drawable/gradient_background"
             android:gravity="center"
             android:padding="10dp"
-            android:text="Duo"
+            android:text="@string/duo"
             android:textColor="@color/vert_principal"
             app:backgroundTint="@color/white" />
 
         <Button
-            android:id="@+id/Carre"
+            android:id="@+id/but_carre"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:background="@drawable/bouton"
+            android:background="@drawable/gradient_background"
             android:padding="10dp"
-            android:text="Carré"
+            android:text="@string/carre"
             android:textColor="@color/vert_principal"
             app:backgroundTint="@color/white" />
 
         <Button
-            android:id="@+id/Cash"
+            android:id="@+id/but_cash"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:background="@drawable/bouton"
+            android:background="@drawable/gradient_background"
             android:padding="10dp"
-            android:text="Cash"
+            android:text="@string/cash"
             android:textColor="@color/vert_principal"
             app:backgroundTint="@color/white" />
     </LinearLayout>
