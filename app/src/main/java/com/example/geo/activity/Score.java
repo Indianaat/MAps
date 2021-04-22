@@ -25,20 +25,23 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class Score extends AppCompatActivity {
+
     FirebaseFirestore fStore;
-    ArrayList<String> objScore = new ArrayList<>();
-    ArrayList<Integer> intScore = new ArrayList<>();
+
     ListView listViewScore;
+
     ArrayList<ScoreDB> objtScoreDB = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_score);
+
         listViewScore = findViewById(R.id.list_score);
         fStore = FirebaseFirestore.getInstance();
         fStore.collection("users")
                 .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {

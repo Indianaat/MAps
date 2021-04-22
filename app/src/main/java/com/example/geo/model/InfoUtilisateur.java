@@ -26,6 +26,7 @@ public class InfoUtilisateur extends Application {
     }
 
     private Integer ScoreGeo=0;
+
     private Integer ScoreQuizz=0;
 
     public String getIdUSer() {

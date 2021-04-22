@@ -4,13 +4,11 @@
 
  **/
 
-package com.example.geo;
+package com.example.geo.activity;
 
 import androidx.fragment.app.FragmentActivity;
 
-import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -18,8 +16,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.example.geo.R;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
@@ -46,43 +44,47 @@ import java.util.Random;
 public class Geo extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
-    private LatLng latLng2;
-    String in;
-    ArrayList<String> arrayVille = new ArrayList<>();
-    HashMap<String, LatLng> Mapcity = new HashMap();
-    Integer CityChosen;
-    TextView cityChosenView, txtNumQuest;
-    Double distance, score;
-    Button btnNext, but_popup_marker, but_popup_next;
-    Integer numQuestion =1;
-    Marker markerPointChoisi, markerVilleATrouver;
-    Polyline distancePoly;
-    LatLng cooPointChoisi, cooVilleATrouver;
-    Dialog dialog;
     private Geo geoActivity;
-    ArrayList <Double> listeScore = new ArrayList<>();
-    ArrayList <Double> listeDistance = new ArrayList<>();
+
+    Integer CityChosen, numQuestion =1;
+    Double distance, score;
+
+    TextView txt_city_chosen, txt_num_quest;
+    Button but_next, but_popup_marker, but_popup_next;
+
+    Marker markerPointChosen, markerCityToFound;
+    Polyline distancePoly;
+    LatLng cooPointChosen, cooCityToFound;
+    Dialog dialog;
+
+    ArrayList <Double> listScore = new ArrayList<>();
+    ArrayList <Double> listDistance = new ArrayList<>();
+    ArrayList<String> arrayCity = new ArrayList<>();
+    HashMap<String, LatLng> Mapcity = new HashMap();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_geo);
-        cityChosenView = findViewById(R.id.cityChosen);
-        txtNumQuest = findViewById(R.id.txtNumQuest);
-        btnNext = (Button) findViewById(R.id.btnNext);
+
+        txt_city_chosen = findViewById(R.id.txt_city_chosen);
+        txt_num_quest = findViewById(R.id.txt_num_quest);
+        but_next = (Button) findViewById(R.id.but_next);
 
         dialog = new Dialog(this);
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map); // Fragment de la map google
-        this.geoActivity = this;
-        mapFragment.getMapAsync(this);
 
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.fra_map); // Fragment de la map google
+
+        this.geoActivity = this;
+
+        mapFragment.getMapAsync(this);
 
         InputStream in = getResources().openRawResource(R.raw.ville); // Inputstream des villes pouvant être choisi
 
         JSONParser jsonParser = new JSONParser(); // création d'un Parser
 
-
-        txtNumQuest.setText(numQuestion.toString() + "/ 5");
+        txt_num_quest.setText(numQuestion.toString() + "/ 5");
 
         //Manipulation du JSON
         try {
@@ -96,7 +98,7 @@ public class Geo extends FragmentActivity implements OnMapReadyCallback {
                 Double lat = ((Double) o.get("Latitude"));
                 Double lg = ((Double) o.get("Longitude"));
                 LatLng latLng = new LatLng(lat,lg);
-                arrayVille.add(city);
+                arrayCity.add(city);
                 Mapcity.put(city,latLng); // MAP avec les Villes et leurs corrdonnées GPS
             }
 
@@ -105,8 +107,6 @@ public class Geo extends FragmentActivity implements OnMapReadyCallback {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-
-
     }
 
     //Bordures de cadre de la france pour la map
@@ -128,15 +128,14 @@ public class Geo extends FragmentActivity implements OnMapReadyCallback {
         mMap.setMaxZoomPreference(10.0f);
 
         //supression des anciens  markeur et lignes
-        if (markerPointChoisi != null){
-            Log.v("TZZSYGREUYHEZGVY","ALED");
-            markerPointChoisi.remove();
+        if (markerPointChosen != null){
+            markerPointChosen.remove();
         }
         if (distancePoly != null){
             distancePoly.remove();
         }
-        if (markerVilleATrouver != null){
-            markerVilleATrouver.remove();
+        if (markerCityToFound != null){
+            markerCityToFound.remove();
         }
 
         try {
@@ -156,48 +155,46 @@ public class Geo extends FragmentActivity implements OnMapReadyCallback {
         // Choix random de la ville
         Random rand = new Random();
         CityChosen = rand.nextInt(Mapcity.size());
-        cityChosenView.setText(arrayVille.get(CityChosen)); // affichage de la ville a choisir
-        cooVilleATrouver = Mapcity.get(arrayVille.get(CityChosen));
+        txt_city_chosen.setText(arrayCity.get(CityChosen)); // affichage de la ville a choisir
+        cooCityToFound = Mapcity.get(arrayCity.get(CityChosen));
 
         // On Détermine les coordonnées de la ville a trouver
-        LatLng cityFounded = Mapcity.get(arrayVille.get(CityChosen));
+        LatLng cityFounded = Mapcity.get(arrayCity.get(CityChosen));
 
         // Méthode pour mettre le marker sur la map
         mMap.setOnMapLongClickListener(new GoogleMap.OnMapLongClickListener() {
             @Override
             public void onMapLongClick(LatLng LatLgnCityChosen) {
-                if( cooPointChoisi == null){
-                    if (markerPointChoisi != null) {
-                        markerPointChoisi.remove();
+                if( cooPointChosen == null){
+                    if (markerPointChosen != null) {
+                        markerPointChosen.remove();
                     }
                     if (distancePoly != null) {
                         distancePoly.remove();
                     }
-                    if (markerVilleATrouver != null){
-                        markerVilleATrouver.remove();
+                    if (markerCityToFound != null){
+                        markerCityToFound.remove();
                     }
 
-                    cooPointChoisi = LatLgnCityChosen;
+                    cooPointChosen = LatLgnCityChosen;
                     // Ajour du markeur sur la map apres un long clic
-                    markerPointChoisi=gestionMap.PlaceMarker(cooPointChoisi);
+                    markerPointChosen=gestionMap.PlaceMarker(cooPointChosen);
 
                     //calcul de la distance entre les 2 points
-                    distance = SphericalUtil.computeDistanceBetween(cooPointChoisi, cooVilleATrouver);
-                    listeDistance.add(distance);
+                    distance = SphericalUtil.computeDistanceBetween(cooPointChosen, cooCityToFound);
+                    listDistance.add(distance);
                     //Affichage du trait reliant les 2 positions
-                    gestionMap.TracerDistance(cooPointChoisi,cooPointChoisi);
+                    gestionMap.TracerDistance(cooPointChosen,cooPointChosen);
                     // Ajout du marker de la ville à trouver
-                    markerVilleATrouver=gestionMap.PlaceMarker(cooVilleATrouver);
+                    markerCityToFound=gestionMap.PlaceMarker(cooCityToFound);
 
-                    distancePoly =mMap.addPolyline(gestionMap.TracerDistance(cooVilleATrouver,cooPointChoisi));
+                    distancePoly =mMap.addPolyline(gestionMap.TracerDistance(cooCityToFound,cooPointChosen));
                     // Toast de la distance
                     //Toast.makeText(Geo.this,"Distance \n " + String.format("%.2f", distance / 1000) + "km",Toast.LENGTH_LONG).show();
                     score = 5000/(1+((distance/1000)/100) );
-                    listeScore.add(score);
-
+                    listScore.add(score);
 
                     //PopUP
-                    //popup de fin de partie
                     TextView txt_popup_aff_score;
 
                     dialog.setContentView(R.layout.popup_geo);
@@ -237,29 +234,29 @@ public class Geo extends FragmentActivity implements OnMapReadyCallback {
     public void actNext(View v){
         Log.v("VIEW",v.toString());
         if (numQuestion < 5){
-            if (markerPointChoisi != null) {
-                markerPointChoisi.remove();
+            if (markerPointChosen != null) {
+                markerPointChosen.remove();
             }
             if (distancePoly != null) {
                 distancePoly.remove();
             }
-            if (markerVilleATrouver != null){
-                markerVilleATrouver.remove();
+            if (markerCityToFound != null){
+                markerCityToFound.remove();
             }
-            cooPointChoisi =null;
+            cooPointChosen =null;
             // Choix random de la ville
             Random rand = new Random();
             CityChosen = rand.nextInt(Mapcity.size());
-            cityChosenView.setText(arrayVille.get(CityChosen));
-            cooVilleATrouver = Mapcity.get(arrayVille.get(CityChosen));
+            txt_city_chosen.setText(arrayCity.get(CityChosen));
+            cooCityToFound = Mapcity.get(arrayCity.get(CityChosen));
             numQuestion = numQuestion+1;
-            txtNumQuest.setText(numQuestion.toString() + "/ 5");
+            txt_num_quest.setText(numQuestion.toString() + "/ 5");
         }else {
-            btnNext.setText("Voir score");
-            Intent i= new Intent(Geo.this,Geo_Score.class);
+            but_next.setText("Voir score");
+            Intent i= new Intent(Geo.this, GeoScore.class);
             Bundle b = new Bundle();
-            b.putSerializable("arrayScore",listeScore);
-            b.putSerializable("arrayDistance",listeDistance);
+            b.putSerializable("arrayScore",listScore);
+            b.putSerializable("arrayDistance",listDistance);
             i.putExtras(b);
             startActivity(i);
         }

@@ -1,4 +1,4 @@
-package com.example.geo;
+package com.example.geo.activity;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
@@ -9,21 +9,20 @@ import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 
 public class GestionMap {
-    LatLng cooVilleATrouver;
-    LatLng cooPointPose;
+
     GoogleMap googleMap;
-    Marker markerPoint;
-    GestionMap (GoogleMap googleMap) {
+
+    public GestionMap(GoogleMap googleMap) {
         this.googleMap = googleMap;
     }
-    Marker PlaceMarker (LatLng cooPoint){
+    public Marker PlaceMarker(LatLng cooPoint){
         Marker markerPoint = googleMap.addMarker(new MarkerOptions()
                 .position(cooPoint).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE))
                 .title("Your marker title")
                 .snippet("Your marker snippet"));
         return  markerPoint;
     }
-    PolylineOptions TracerDistance (LatLng Point1, LatLng Point2){
+    public PolylineOptions TracerDistance(LatLng Point1, LatLng Point2){
         PolylineOptions rectOptions = new PolylineOptions()
                 .add(Point1)
                 .add(Point2);

@@ -12,10 +12,10 @@
         android:orientation="vertical">
 
         <Button
-            android:id="@+id/boutonInd1"
+            android:id="@+id/but_tips1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/bouton"
+            android:background="@drawable/gradient_background"
             android:gravity="center"
             android:padding="10dp"
             android:layout_margin="10dp"
@@ -24,10 +24,10 @@
             app:backgroundTint="@color/white" />
 
         <Button
-            android:id="@+id/boutonInd2"
+            android:id="@+id/but_tips2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/bouton"
+            android:background="@drawable/gradient_background"
             android:padding="10dp"
             android:layout_margin="10dp"
             android:text="Carré"

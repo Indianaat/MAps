@@ -15,8 +15,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
-import com.example.geo.Accueil;
-import com.example.geo.Connexion;
 import com.example.geo.R;
 import com.example.geo.model.InfoUtilisateur;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -33,12 +31,15 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Inscription extends AppCompatActivity {
+
     public static final String TAG = "TAG";
-    EditText mPseudo,mEmail,mPassword;
-    Button mRegisterBtn;
-    TextView mLoginBtn;
+
+    EditText txt_pseudo,txt_email,txt_password;
+    Button but_signup;
+    TextView txt_connexion;
+    ProgressBar progress_bar;
+
     FirebaseAuth fAuth;
-    ProgressBar progressBar;
     FirebaseFirestore fStore;
     InfoUtilisateur infoUtilisateur;
 
@@ -47,46 +48,48 @@ public class Inscription extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inscription);
 
-        mPseudo     = findViewById(R.id.pseudo);
-        mEmail      = findViewById(R.id.Email);
-        mPassword   = findViewById(R.id.password);
-        mRegisterBtn= findViewById(R.id.registerBtn);
-        mLoginBtn   = findViewById(R.id.createText);
+        txt_pseudo = findViewById(R.id.txt_pseudo);
+        txt_email = findViewById(R.id.txt_email);
+        txt_password = findViewById(R.id.txt_password);
+        but_signup = findViewById(R.id.but_signup);
+        txt_connexion = findViewById(R.id.txt_connexion);
+
         infoUtilisateur = (InfoUtilisateur) getApplicationContext();
         fAuth = FirebaseAuth.getInstance();
         fStore = FirebaseFirestore.getInstance();
-        progressBar = findViewById(R.id.progressBar);
+
+        progress_bar = findViewById(R.id.progress_bar);
 
         if(fAuth.getCurrentUser() != null){
             startActivity(new Intent(getApplicationContext(), Accueil.class));
             finish();
         }
 
-        mRegisterBtn.setOnClickListener(new View.OnClickListener() {
+        but_signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final String email = mEmail.getText().toString().trim();
-                String password = mPassword.getText().toString().trim();
-                final String pseudo = mPseudo.getText().toString();
-                String pseudo2 = mPseudo.getText().toString();
+                final String email = txt_email.getText().toString().trim();
+                String password = txt_password.getText().toString().trim();
+                final String pseudo = txt_pseudo.getText().toString();
+                String pseudo2 = txt_pseudo.getText().toString();
 
 
                 if(TextUtils.isEmpty(email)){
-                    mEmail.setError("Email requis");
+                    txt_email.setError("Email requis");
                     return;
                 }
 
                 if(TextUtils.isEmpty(password)){
-                    mPassword.setError("Mot de passe requis.");
+                    txt_password.setError("Mot de passe requis.");
                     return;
                 }
 
                 if(password.length() < 6){
-                    mPassword.setError("Le mdp doit être >= 6");
+                    txt_password.setError("Le mdp doit être >= 6");
                     return;
                 }
 
-                progressBar.setVisibility(View.VISIBLE);
+                progress_bar.setVisibility(View.VISIBLE);
 
                 //Enregistrement dans FireBase
                 fAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -132,14 +135,14 @@ public class Inscription extends AppCompatActivity {
                             startActivity(new Intent(getApplicationContext(),Accueil.class));
                         }else {
                             Toast.makeText(Inscription.this, "Erreur ! " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                            progressBar.setVisibility(View.GONE);
+                            progress_bar.setVisibility(View.GONE);
                         }
                     }
                 });
             }
         });
 
-        mLoginBtn.setOnClickListener(new View.OnClickListener() {
+        txt_connexion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getApplicationContext(), Connexion.class));

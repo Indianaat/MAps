@@ -5,44 +5,45 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/fond_degrade"
-    tools:context=".Geo_Score">
+    tools:context=".activity.GeoScore">
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/txt_title_score"
         android:layout_width="wrap_content"
         android:layout_height="28dp"
-        android:layout_marginTop="120dp"
-        android:text="Vos scores sur le jeu Geo"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:text="@string/score_geo"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ListView
-        android:id="@+id/listScore"
-        android:layout_width="374dp"
-        android:layout_height="432dp"
+        android:id="@+id/list_score"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_marginStart="24dp"
+        android:layout_marginLeft="24dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.655" />
+        app:layout_constraintStart_toEndOf="@+id/txt_title_score"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/btnAccueil"
+        android:id="@+id/but_accueil"
         android:layout_width="152dp"
         android:layout_height="50dp"
-        android:text="Accueil"
-        android:background="@drawable/bouton"
-        android:backgroundTint="@color/white"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
         android:textColor="@color/vert_principal"
-        app:backgroundTint="@color/white"
+        android:background="@drawable/gradient_background"
         android:onClick="actAccueil"
+        android:text="@string/accueil"
+        app:backgroundTint="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintEnd_toEndOf="@+id/txt_title_score"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.951" />
+        app:layout_constraintTop_toBottomOf="@+id/txt_title_score"
+        app:layout_constraintVertical_bias="0.503" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -14,24 +14,21 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.geo.Question;
-import com.example.geo.Quiz;
+import com.example.geo.activity.Question;
+import com.example.geo.activity.Quiz;
 import com.example.geo.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.firestore.FirebaseFirestore;
-
-import java.util.Random;
 
 public class CashFragment extends Fragment {
     private static final String TAG = "Log: ";
 
     View view;
-    TextView txtreponse;
-    Button boutValReponse;
+    TextView txt_reponse;
+    Button but_check;
 
     String reponse;
     int scoreCash = 2500;
@@ -47,12 +44,12 @@ public class CashFragment extends Fragment {
 
         view = inflater.inflate(R.layout.fragment_cash, container, false);
 
-        reponseCash();
+        answerCash();
         // Inflate the layout for this fragment
         return view;
     }
 
-    public void reponseCash(){
+    public void answerCash(){
 
         Quiz quizActivity = (Quiz) getActivity();
 
@@ -64,14 +61,14 @@ public class CashFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 final Question question = dataSnapshot.getValue(Question.class);
 
-                txtreponse = view.findViewById(R.id.txtReponse);
-                boutValReponse = view.findViewById(R.id.boutValReponse);
+                txt_reponse = view.findViewById(R.id.txt_reponse);
+                but_check = view.findViewById(R.id.but_check);
 
                 // Le joueur valide sa réponse
-                boutValReponse.setOnClickListener(new View.OnClickListener() {
+                but_check.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        reponse = txtreponse.getText().toString().trim(); // .trim() pour supprimer les espaces avant et après
+                        reponse = txt_reponse.getText().toString().trim(); // .trim() pour supprimer les espaces avant et après
                         Log.v(TAG, reponse + "");
 
                         // Si la réponse est correct

@@ -7,22 +7,20 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import android.os.Handler;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.example.geo.Question;
-import com.example.geo.Quiz;
+import com.example.geo.activity.Question;
+import com.example.geo.activity.Quiz;
 import com.example.geo.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.Random;
 
@@ -32,8 +30,8 @@ public class DuoFragment extends Fragment {
     boolean place;
     int scoreDuo = 250;
     View view;
-    Button indice1;
-    Button indice2;
+    Button but_tips1;
+    Button but_tips2;
 
     DatabaseReference databaseReference;
 
@@ -47,17 +45,17 @@ public class DuoFragment extends Fragment {
 
         view = inflater.inflate(R.layout.fragment_duo, container, false);
 
-        indiceDuo();
+        tipsDuo();
         // Inflate the layout for this fragment
         return view;
     }
 
-    public void indiceDuo(){
+    public void tipsDuo(){
 
         Quiz quizActivity = (Quiz) getActivity();
 
-        indice1 = view.findViewById(R.id.boutonInd1);
-        indice2 = view.findViewById(R.id.boutonInd2);
+        but_tips1 = view.findViewById(R.id.but_tips1);
+        but_tips2 = view.findViewById(R.id.but_tips2);
 
         int idQuestion = quizActivity.getIdQuestion(); //Récupère l'ID dans l'activité Quiz
 
@@ -68,19 +66,19 @@ public class DuoFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 final Question question = dataSnapshot.getValue(Question.class);
                 // Récupération des options de réponses --> écrit l'option dans le texte du bouton de manière aléatoire
-                if (genereRandom()){
-                    indice1.setText(question.getAnswer());
-                    indice2.setText(question.getOption2());
+                if (generateRandom()){
+                    but_tips1.setText(question.getAnswer());
+                    but_tips2.setText(question.getOption2());
                 } else {
-                    indice1.setText(question.getOption1());
-                    indice2.setText(question.getAnswer());
+                    but_tips1.setText(question.getOption1());
+                    but_tips2.setText(question.getAnswer());
                 }
 
                 // L'utilisateur clique sur le 1er bouton
-                indice1.setOnClickListener(new View.OnClickListener() {
+                but_tips1.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        if ( indice1.getText().toString().equals(question.getAnswer())) {
+                        if ( but_tips1.getText().toString().equals(question.getAnswer())) {
                             Toast.makeText(quizActivity.getApplicationContext(), "Correct", Toast.LENGTH_SHORT).show();
                             quizActivity.score = quizActivity.score + scoreDuo;
                             Handler handler = new Handler();
@@ -105,10 +103,10 @@ public class DuoFragment extends Fragment {
                 });
 
                 // L'utilisateur clique sur le 2eme bouton
-                indice2.setOnClickListener(new View.OnClickListener() {
+                but_tips2.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        if ( indice2.getText().toString().equals(question.answer)) {
+                        if ( but_tips2.getText().toString().equals(question.answer)) {
                             Toast.makeText(quizActivity.getApplicationContext(), "Correct", Toast.LENGTH_SHORT).show();
                             quizActivity.score = quizActivity.score + scoreDuo;
                             Handler handler = new Handler();
@@ -141,7 +139,7 @@ public class DuoFragment extends Fragment {
     }
 
     // Méthode pour générer un boolean aléatoirement pour mélanger les indices
-    public boolean genereRandom(){
+    public boolean generateRandom(){
         Random random = new Random();
         place = random.nextBoolean();
         return place;

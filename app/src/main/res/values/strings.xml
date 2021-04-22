@@ -14,11 +14,29 @@
     <string name="txtCash">Entrez votre solution</string>
     <string name="pres_quiz">Vous connaissez la réponse ? \n\nQue choisissez-vous ?\n Duo, Carré ou Cash?</string>
     <string name="ville">Ville :</string>
-    <string name="objectif_ce_situer_le_plus_proche_de_la_ville">Objectif : Ce situer le plus proche de la ville</string>
-    <string name="appuyez_longtemps_pour_mettre_votre_marker">Appuyez LONGTEMPS pour mettre votre marker</string>
     <string name="suivant">Suivant</string>
     <string name="score_geo">Vos scores sur le jeu Geo</string>
     <string name="accueil">Accueil</string>
     <string name="inscription">Inscription</string>
+    <string name="play_noscore">Jouer sans enregistrer son score</string>
+    <string name="goal_geo">Objectif : Se situer le plus proche de la ville</string>
+    <string name="tips_geo">Appuyez LONGTEMPS pour mettre votre marker</string>
+    <string name="title_score">Vos scores sur le jeu Geo</string>
+    <string name="signup">Inscription</string>
+    <string name="subtitle_signup">Création d\'un nouveau compte</string>
+    <string name="pseudo">Pseudo</string>
+    <string name="email">Email</string>
+    <string name="password_sign">Password</string>
+    <string name="sign">S\'inscrire</string>
+    <string name="co_ok">Déja enregistré ? connectez vous</string>
+    <string name="question">Question</string>
+    <string name="duo">Duo</string>
+    <string name="carre">Carré</string>
+    <string name="cash">Cash</string>
+    <string name="score">Score</string>
+    <string name="votre_score">Votre score</string>
+    <string name="replay">Rejouer</string>
+    <string name="played">Partie déja joué</string>
+    <string name="expl_popup">Veuillez cliquer sur suivant vous avez déja posé votre point</string>
 
 </resources>

@@ -5,24 +5,26 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/fond_degrade"
-    tools:context=".Geo">
+    tools:context=".activity.Geo">
 
     <fragment
-        android:id="@+id/map"
+        android:id="@+id/fra_map"
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="413dp"
         android:layout_height="456dp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:context=".Geo"
-        tools:layout_editor_absoluteX="0dp" />
+        tools:context=".activity.Geo"
+        tools:ignore="MissingConstraints" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/txt_city"
         android:layout_width="wrap_content"
         android:layout_height="22dp"
-        android:text="Ville : "
-        app:layout_constraintBottom_toTopOf="@+id/map"
+        android:text="@string/ville"
+        app:layout_constraintBottom_toTopOf="@+id/fra_map"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.112"
         app:layout_constraintStart_toStartOf="parent"
@@ -30,42 +32,42 @@
         app:layout_constraintVertical_bias="0.551" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/txt_goal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
-        android:text="Objectif : Se situer le plus proche de la ville"
+        android:text="@string/goal_geo"
         android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/map"
+        app:layout_constraintTop_toBottomOf="@+id/fra_map"
         app:layout_constraintVertical_bias="0.279" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/txt_tips"
         android:layout_width="315dp"
         android:layout_height="22dp"
-        android:text="Appuyez LONGTEMPS pour mettre votre marker"
+        android:text="@string/tips_geo"
         android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3"
+        app:layout_constraintTop_toBottomOf="@+id/txt_goal"
         app:layout_constraintVertical_bias="0.213"
         android:gravity="center_horizontal" />
 
     <Button
-        android:id="@+id/btnNext"
+        android:id="@+id/but_next"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Suivant"
+        android:text="@string/suivant"
         android:onClick="actNext"
-        android:background="@drawable/bouton"
-        android:backgroundTint="@color/white"
+        android:background="@drawable/gradient_background"
         android:textColor="@color/vert_principal"
+        android:backgroundTint="@color/white"
         app:backgroundTint="@color/white"
-        app:layout_constraintBottom_toTopOf="@+id/map"
+        app:layout_constraintBottom_toTopOf="@+id/fra_map"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.916"
         app:layout_constraintStart_toStartOf="parent"
@@ -73,27 +75,28 @@
         app:layout_constraintVertical_bias="0.177" />
 
     <TextView
-        android:id="@+id/cityChosen"
+        android:id="@+id/txt_city_chosen"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="52dp"
         android:textColor="@color/white"
         android:textSize="24dp"
-        app:layout_constraintBottom_toTopOf="@+id/map"
+        app:layout_constraintBottom_toTopOf="@+id/fra_map"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.129"
-        app:layout_constraintStart_toEndOf="@+id/textView2"
+        app:layout_constraintHorizontal_bias="0.179"
+        app:layout_constraintStart_toEndOf="@+id/txt_city"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.509" />
 
     <TextView
-        android:id="@+id/txtNumQuest"
+        android:id="@+id/txt_num_quest"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/map"
+        app:layout_constraintBottom_toTopOf="@+id/fra_map"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.664"
-        app:layout_constraintStart_toEndOf="@+id/cityChosen"
-        app:layout_constraintTop_toBottomOf="@+id/btnNext"
+        app:layout_constraintStart_toEndOf="@+id/txt_city_chosen"
+        app:layout_constraintTop_toBottomOf="@+id/but_next"
         app:layout_constraintVertical_bias="0.4" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
