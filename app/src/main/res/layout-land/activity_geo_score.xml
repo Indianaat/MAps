@@ -36,7 +36,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
         android:textColor="@color/vert_principal"
-        android:background="@drawable/gradient_background"
+        android:background="@drawable/corner_background"
         android:onClick="actAccueil"
         android:text="@string/accueil"
         app:backgroundTint="@color/white"

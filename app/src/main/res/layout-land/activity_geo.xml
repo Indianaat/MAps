@@ -83,7 +83,7 @@
             android:layout_gravity="center"
             android:layout_margin="15dp"
             android:onClick="actNext"
-            android:background="@drawable/gradient_background"
+            android:background="@drawable/corner_background"
             android:text="@string/suivant"
             android:textColor="@color/vert_principal"
             android:backgroundTint="@color/white"

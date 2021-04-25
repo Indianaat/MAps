@@ -22,7 +22,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ny_statut_liberte" />
+        app:srcCompat="@drawable/geoquiz" />
 
     <ImageView
         android:id="@+id/but_geo"
@@ -34,7 +34,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/but_quiz"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/space" />
+        app:srcCompat="@drawable/geomaps" />
 
     <ImageView
         android:id="@+id/but_score"
@@ -49,7 +49,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/but_geo"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/scores" />
+        app:srcCompat="@drawable/geoscores" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

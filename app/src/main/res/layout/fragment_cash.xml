@@ -26,7 +26,7 @@
         android:layout_margin="10dp"
         android:padding="10dp"
         android:text="@string/but_valider"
-        android:background="@drawable/gradient_background"
+        android:background="@drawable/corner_background"
         android:textColor="@color/vert_principal"
         app:backgroundTint="@color/white"/>
     </LinearLayout>

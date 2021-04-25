@@ -221,7 +221,7 @@ public class Geo extends FragmentActivity implements OnMapReadyCallback {
 
                 } else {
                     //PopUP
-                    dialog.setContentView(R.layout.popup_geo_fin);
+                    dialog.setContentView(R.layout.popup_geo_deja_joue);
                     dialog.show();
                 }
 

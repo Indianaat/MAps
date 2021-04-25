@@ -58,7 +58,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="8dp"
-            android:background="@drawable/gradient_background"
+            android:background="@drawable/corner_background"
             android:onClick="actValidate"
             android:padding="10dp"
             android:text="@string/but_valider"

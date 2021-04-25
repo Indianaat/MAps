@@ -33,7 +33,7 @@
         android:layout_width="152dp"
         android:layout_height="50dp"
         android:text="@string/accueil"
-        android:background="@drawable/gradient_background"
+        android:background="@drawable/corner_background"
         android:backgroundTint="@color/white"
         android:textColor="@color/vert_principal"
         app:backgroundTint="@color/white"
